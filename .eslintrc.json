@@ -1,0 +1,46 @@
+{
+  "env": {
+      "browser": true,
+      "es2021": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+      "plugin:react/recommended",
+      "plugin:tailwindcss/recommended"
+  ],
+  "overrides": [
+      {
+          "env": {
+              "node": true
+          },
+          "files": [
+                ".eslintrc.ts",
+                ".eslintrc.tsx"
+            ],
+          "parserOptions": {
+              "sourceType": "script"
+          }
+      }
+  ],
+  "plugins": [
+      "react",
+      "@typescript-eslint",
+      "unused-imports"
+  ],
+  "rules": {
+      "quotes": [ "error", "double" ],
+      "semi": [ "error", "never" ],
+      "indent": [ "error", 4 ],
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+      "react/no-unescaped-entities": "off",
+      "object-curly-spacing": [ "error", "always" ],
+      "array-bracket-spacing": [ "error", "always" ],
+      "unused-imports/no-unused-imports": "error"
+  },
+  "settings": {
+      "react": {
+          "version": "detect"
+      }
+  }
+}

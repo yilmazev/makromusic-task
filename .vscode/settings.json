@@ -1,0 +1,20 @@
+{
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "typescript.preferences.quoteStyle": "double",
+    "typescript.format.placeOpenBraceOnNewLineForControlBlocks": true,
+    "typescript.format.placeOpenBraceOnNewLineForFunctions": true,
+    "editor.wordWrap": "off",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.sortJSON": false,
+        "source.organizeImports": true
+    },
+    "editor.formatOnSave": false,
+    "git.ignoreLimitWarning": true,
+    "files.eol": "\n",
+    "files.insertFinalNewline": false,
+    "files.trimFinalNewlines": false,
+    "emmet.showExpandedAbbreviation": "never",
+    "javascript.format.enable": false,
+}
