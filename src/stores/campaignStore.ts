@@ -1,8 +1,8 @@
 "use client"
 
-import { create } from "zustand";
-import { combine } from "zustand/middleware";
-import { apiCreateCampaign } from "../services/api";
+import { create } from "zustand"
+import { combine } from "zustand/middleware"
+import { apiCreateCampaign } from "../services/api"
 
 type CampaignStore = {
     isLoading: boolean;
