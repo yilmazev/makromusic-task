@@ -10,3 +10,12 @@ export const apiCreateCampaign = async () => {
         return error
     }
 }
+
+export const apiSearchOnSpotify = async (searchQuery: string) => {
+    try {
+        const response = await axios.get(`${apiEndpoint}/search-on-spotify?q=${searchQuery}`)
+        return response.data?.tracks?.items || []
+    } catch (error) {
+        return []
+    }
+}

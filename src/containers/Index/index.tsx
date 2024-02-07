@@ -1,24 +1,29 @@
 "use client"
 
 import Button from "@/components/Button"
+import { useCampaignStore } from "@/stores/campaignStore"
 import { useRouter } from "next/navigation"
-import { useCampaignStore } from "../../stores/campaignStore"
 
 const Index: React.FC = () => {
+    /*
+        Notlar:
+        - Kampanya oluştura tıkladıktan sonra 'create-campaign' endpointine istek at
+    */
+
     const router = useRouter()
     const { isLoading, createCampaign } = useCampaignStore()
 
+    // Kampanya oluştur
     const handleCreateCampaign = async () => {
         await createCampaign()
+        
         if (!isLoading) {
             router.push("/create-campaign")
         }
     }
 
     return (
-        <div>
-            <Button size="large" isLoading={isLoading} onClick={handleCreateCampaign}>Kampanya Oluştur</Button>
-        </div>
+        <Button size="large" isLoading={isLoading} onClick={handleCreateCampaign}>Kampanya Oluştur</Button>
     )
 }
 
