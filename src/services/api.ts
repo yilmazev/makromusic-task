@@ -14,7 +14,16 @@ export const apiCreateCampaign = async () => {
 export const apiSearchOnSpotify = async (searchQuery: string) => {
     try {
         const response = await axios.get(`${apiEndpoint}/search-on-spotify?q=${searchQuery}`)
-        return response.data?.tracks?.items || []
+        return response.data?.tracks?.items
+    } catch (error) {
+        return []
+    }
+}
+
+export const apiTrackGenres = async (searchQuery: string) => {
+    try {
+        const response = await axios.get(`${apiEndpoint}/track-genres`)
+        return response.data
     } catch (error) {
         return []
     }

@@ -25,7 +25,7 @@ const StepIndicator = () => {
                     <p className="text-gray-400">{title}</p>
                     <div className="h-1 w-8 rounded-2xl bg-gray-200">
                         <div
-                            className={`h-full rounded-2xl bg-primary-600 transition duration-500 ${
+                            className={`h-full rounded-2xl bg-primary-600 transition-all duration-500 ${
                                 (index === currentStep && "w-2") ||
                                 (index < currentStep && "w-full") ||
                                 (index > currentStep && "w-0")

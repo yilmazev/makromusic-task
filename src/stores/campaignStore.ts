@@ -5,10 +5,10 @@ import { combine } from "zustand/middleware"
 import { apiCreateCampaign } from "../services/api"
 
 type CampaignStore = {
-    isLoading: boolean;
-    campaignData: null | undefined | any;
-    createCampaign: () => Promise<void>;
-};
+    isLoading: boolean
+    campaignData: null | undefined | any
+    createCampaign: () => Promise<void>
+}
 
 export const useCampaignStore = create<CampaignStore>(
     combine(

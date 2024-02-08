@@ -1,4 +1,5 @@
 import { Check } from "@/components/Icons"
+import useDebouncedSearch from "@/hooks/useDebouncedSearch"
 import { apiSearchOnSpotify } from "@/services/api"
 import { usePackageStore } from "@/stores/packageStore"
 import clsx from "clsx"
@@ -8,30 +9,34 @@ import Select from "react-select"
 
 const Track: React.FC = () => {
     /*
-        Yapılacaklar:
-        - Arama iyileştirilecek
-    */
-
-    /*
         Notlar:
-        - React-select kütüphanesi kullanılacak
-        - Eğer checkbox seçiliyse, search disabled olacak ve null gönderilecek
-        - Eğer seçili şarkı yoksa veya checkbox seçili değilse button disabled olmalı
+        - React-select kütüphanesi kullanılacak (+)
+        - Eğer checkbox seçiliyse, search disabled olacak ve null gönderilecek (+)
+        - Eğer seçili şarkı yoksa veya checkbox seçili değilse button disabled olmalı (+)
     */
-
-    const { selectedTrack, setSelectedTrack, isTrackNotInAir, setIsTrackNotInAir } = usePackageStore()
+   
+    const { isLoading, setIsLoading, selectedTrack, setSelectedTrack, isTrackNotInAir, setIsTrackNotInAir } = usePackageStore()
     const [ searchQuery, setSearchQuery ] = useState("")
     const [ searchResults, setSearchResults ] = useState([])
-
-    // Arama
+    const debounce = useDebouncedSearch(500)
+    
+    // Gecikmeli arama
     useEffect(() => {
-        handleDebouncedSearch()
+        debounce(handleDebouncedSearch)
     }, [ searchQuery ])
 
-    // Gecikmeli arama
+    // Arama sonuçları
     const handleDebouncedSearch = async () => {
-        const response = await apiSearchOnSpotify(searchQuery)
-        setSearchResults(response)
+        setIsLoading(true)
+
+        try {
+            const response = await apiSearchOnSpotify(searchQuery)
+            setSearchResults(response)
+        } catch(error) {
+            console.log(error)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     // Şarkı seçme
@@ -41,9 +46,7 @@ const Track: React.FC = () => {
 
     // Parçam yayında değil
     const handleNotInAir = () => {
-        if (isTrackNotInAir) {
-            setSelectedTrack(null)
-        }
+        setSelectedTrack(null)
         setIsTrackNotInAir(!isTrackNotInAir)
     }
     
@@ -88,8 +91,10 @@ const Track: React.FC = () => {
             </div>
             <Select
                 classNames={{ control: () => clsx("!rounded-lg !border-gray-300") }}
-                placeholder={<p className="!text-sm !text-gray-400">Spotify'da ara</p>}
+                placeholder={<span className="!text-sm !text-gray-400">Spotify'da ara</span>}
+                noOptionsMessage={() => <span className="!text-sm !text-gray-400">{isLoading ? "Yükleniyor..." : "Hiçbir sonuç bulunamadı"}</span>}
                 options={options}
+                value={selectedTrack}
                 onInputChange={(value) => {
                     setSearchQuery(value)
                     if (!value) handleDebouncedSearch()
@@ -100,7 +105,7 @@ const Track: React.FC = () => {
             />
             <div className="mt-3 flex items-center gap-2">
                 <div className="relative size-4">
-                    <input type="checkbox" id="off-the-air" onChange={handleNotInAir} className="peer relative size-full cursor-pointer rounded border border-gray-300 bg-white transition-all checked:border-gray-300 checked:bg-gray-300 checked:before:bg-gray-300" />
+                    <input type="checkbox" id="off-the-air" checked={isTrackNotInAir} onChange={handleNotInAir} className="peer relative size-full cursor-pointer rounded border border-gray-300 bg-white transition-all checked:border-gray-300 checked:bg-gray-300 checked:before:bg-gray-300" />
                     <span className="pointer-events-none absolute left-2/4 top-2.5 -translate-x-2/4 -translate-y-2/4 text-gray-700 opacity-0 transition-opacity peer-checked:opacity-100">
                         <Check className="w-3.5" />
                     </span>
