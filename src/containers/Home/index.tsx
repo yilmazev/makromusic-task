@@ -5,14 +5,14 @@ import { useCampaignStore } from "@/stores/createStore"
 import { usePackageStore } from "@/stores/updateStore"
 import { useRouter } from "next/navigation"
 
-const Index: React.FC = () => {
+const Home: React.FC = () => {
     /*
         Notlar:
         - Kampanya oluştura tıkladıktan sonra 'create-campaign' endpointine istek at (+)
     */
 
     const router = useRouter()
-    const { isLoading, createCampaign } = useCampaignStore()
+    const { isLoading, createCampaign, campaignData } = useCampaignStore()
     const { setStep } = usePackageStore()
 
     // Kampanya oluştur
@@ -30,4 +30,4 @@ const Index: React.FC = () => {
     )
 }
 
-export default Index
+export default Home

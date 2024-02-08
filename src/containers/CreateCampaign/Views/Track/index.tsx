@@ -95,10 +95,7 @@ const Track: React.FC = () => {
                 noOptionsMessage={() => <span className="!text-sm !text-gray-400">{isLoading ? "Yükleniyor..." : "Hiçbir sonuç bulunamadı"}</span>}
                 options={options}
                 value={selectedTrack}
-                onInputChange={(value) => {
-                    setSearchQuery(value)
-                    if (!value) handleDebouncedSearch()
-                }}
+                onInputChange={(value) => {setSearchQuery(value)}}
                 onChange={handleSelectTrack}
                 formatOptionLabel={formatOptionLabel}
                 isDisabled={isTrackNotInAir}

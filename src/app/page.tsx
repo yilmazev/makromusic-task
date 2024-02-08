@@ -1,4 +1,4 @@
-import Index from "@/containers/Index"
+import Home from "@/containers/Home"
 import DefaultLayout from "@/layouts/defaultLayout"
 import Image from "next/image"
 
@@ -8,10 +8,10 @@ const HeaderContent = () => {
     )
 }
 
-export default function Home() {
+export default function Index() {
     return (
         <DefaultLayout header={<HeaderContent />}>
-            <Index />
+            <Home />
         </DefaultLayout>
     )
 }

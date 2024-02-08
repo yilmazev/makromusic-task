@@ -20,7 +20,7 @@ export const apiSearchOnSpotify = async (searchQuery: string) => {
     }
 }
 
-export const apiTrackGenres = async (searchQuery: string) => {
+export const apiTrackGenres = async () => {
     try {
         const response = await axios.get(`${apiEndpoint}/track-genres`)
         return response.data

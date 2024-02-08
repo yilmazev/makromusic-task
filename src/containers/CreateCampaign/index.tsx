@@ -1,4 +1,3 @@
-import { usePackageActions } from "@/actions/packageActions"
 import Button from "@/components/Button"
 import { usePackageStore } from "@/stores/updateStore"
 import React, { useEffect, useState } from "react"
@@ -8,8 +7,12 @@ import Payment from "./Views/Payment"
 import Track from "./Views/Track"
 
 const CreateCampaign: React.FC = () => {
-    const { currentStep, selectedTrack, isTrackNotInAir } = usePackageStore()
-    const { setStep, setStepData } = usePackageActions()
+    /**
+     * ! Multistep dynamic hale getirilecek
+     * ! Sayfalar router halinde yapılacak
+     */
+
+    const { currentStep, selectedTrack, isTrackNotInAir, setStep, setStepData } = usePackageStore()
     const [ isContinue, setIsContinue ] = useState<boolean>(false)
 
     const checkIsContinue = (step: number, notInAir: boolean, track: any) => {
@@ -31,10 +34,16 @@ const CreateCampaign: React.FC = () => {
         }
     }, [])
 
+    //const themeName = 'default';
+    //
+    //const ThemeHomePage = dynamic(() => import(`@/components/theme/${themeName}/pages/homepage`), {
+    //    ssr: false,
+    //});
+
     return (
         <div className="w-full">
             {currentStep === 0 && <Track />}
-            {currentStep === 0 && <Details />}
+            {currentStep === 1 && <Details />}
             {currentStep === 2 && <Campaign />}
             {currentStep === 3 && <Payment />}
             <div className="flex w-full items-center justify-end gap-2.5">

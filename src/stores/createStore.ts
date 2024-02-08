@@ -1,14 +1,19 @@
 "use client"
 
+import { apiCreateCampaign } from "@/services/api"
 import { create } from "zustand"
 import { combine } from "zustand/middleware"
-import { apiCreateCampaign } from "../services/api"
 
 type CampaignStore = {
     isLoading: boolean
     campaignData: null | undefined | any
     createCampaign: () => Promise<void>
 }
+
+/**
+ * TODO: 
+ * localStorage ve sessionStorage birlikte kullanılacak, kodlar içerisine ve konsola not düşürülecek.
+*/
 
 export const useCampaignStore = create<CampaignStore>(
     combine(
