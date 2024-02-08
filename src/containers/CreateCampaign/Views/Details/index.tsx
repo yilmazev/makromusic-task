@@ -1,13 +1,59 @@
+import { Times } from "@/components/Icons"
 import clsx from "clsx"
-import Select from "react-select"
+import React from "react"
+import Select, { MultiValueRemoveProps } from "react-select"
+
+interface CustomOption {
+    value: string;
+    label: string;
+}
 
 const Details: React.FC = () => {
     /*
         Notlar:
         - Burada 'region' string olarak gönderilmeli, keyleri önemli değil fakat burda belirlenenen region'a göre bir sonraki adımda paket gösterimi yapılması gerekiyor.
-        Burası checkbox şeklindedir, Global veya Turkiye'den bir tanesi seçilebilmektedir.
+        Burası checkbox şeklindedir, Global veya Turkiye'den bir tanesi seçilebilmektedir. (+)
         - 'track-genres' route'undan gelmesi gerekmekte datanın ve multiple selection yapılabilir olmalı ve buna göre kayıt atmalı.
     */
+
+    const options: CustomOption[] = [
+        { value: "Rock", label: "Rock" },
+        { value: "Jazz", label: "Jazz" },
+        { value: "Pop", label: "Pop" },
+    ]
+
+    const MultiValueContainer: React.FC<any> = React.memo((props) => {
+        MultiValueContainer.displayName = "MultiValueContainer"
+
+        return (
+            <div className="flex items-center rounded-md border border-gray-300 bg-white px-2 py-1">
+                {props.children}
+            </div>
+        )
+    })
+
+    const MultiValueLabel: React.FC<any> = React.memo((props) => {
+        MultiValueLabel.displayName = "MultiValueLabel"
+
+        return <span className="m-0 p-0 text-sm text-gray-700">{props.children}</span>
+    })
+
+    const MultiValueRemove: React.FC<MultiValueRemoveProps> = React.memo((props) => {
+        MultiValueRemove.displayName = "MultiValueRemove"
+
+        return (
+            <div className="m-0 cursor-pointer p-0 pt-0.5" onClick={(e) => handleRemoveClick(props, e)} {...props}>
+                <Times className="size-3.5 stroke-gray-500 stroke-[3px]" />
+            </div>
+        )
+    })
+
+    const handleRemoveClick = (props: MultiValueRemoveProps, e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (props.innerProps && props.innerProps.onClick) {
+            props.innerProps.onClick(e)
+        }
+    }
+
     return (
         <div className="flex flex-col gap-11">
             <div className="mb-8 rounded-3xl border border-gray-200 bg-white p-6">
@@ -33,7 +79,9 @@ const Details: React.FC = () => {
                 </div>
                 <Select
                     isMulti
-                    classNames={{ control: () => clsx("!rounded-lg !border-gray-300") }}
+                    classNames={{ control: () => clsx("!rounded-lg !border-gray-300 px-3 py-1"), input: () => clsx("!m-0 p-0"), multiValue: () => clsx("m-0 p-0"), valueContainer: () => clsx("gap-1 !p-0") }}
+                    components={{ MultiValueContainer, MultiValueLabel, MultiValueRemove }}
+                    options={options}
                     placeholder={<span className="!text-sm !text-gray-400">Tür ara</span>}
                     noOptionsMessage={() => <span className="!text-sm !text-gray-400">Hiçbir sonuç bulunamadı</span>}
                 />

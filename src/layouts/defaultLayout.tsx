@@ -4,15 +4,15 @@ import Header from "@/components/Header"
 import React, { ReactNode } from "react"
 
 interface DefaultLayoutProps {
-  headerContent: ReactNode;
-  children: ReactNode;
+    header: ReactNode
+    children: ReactNode
 }
 
-const DefaultLayout: React.FC<DefaultLayoutProps> = ({ headerContent, children }) => {
+const DefaultLayout: React.FC<DefaultLayoutProps> = ({ header, children }) => {
     return (
         <div>
             <Header>
-                {headerContent}
+                {header}
             </Header>
             <div className="flex items-center justify-center">
                 <div className="container flex items-center justify-center">

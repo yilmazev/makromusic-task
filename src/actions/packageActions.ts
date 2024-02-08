@@ -1,4 +1,4 @@
-import { usePackageStore } from "@/stores/packageStore"
+import { usePackageStore } from "@/stores/updateStore"
 
 export const usePackageActions = () => {
     const { setStep, setStepData } = usePackageStore()

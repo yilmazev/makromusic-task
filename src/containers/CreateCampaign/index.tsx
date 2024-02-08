@@ -1,6 +1,6 @@
 import { usePackageActions } from "@/actions/packageActions"
 import Button from "@/components/Button"
-import { usePackageStore } from "@/stores/packageStore"
+import { usePackageStore } from "@/stores/updateStore"
 import React, { useEffect, useState } from "react"
 import Campaign from "./Views/Campaign"
 import Details from "./Views/Details"
@@ -34,7 +34,7 @@ const CreateCampaign: React.FC = () => {
     return (
         <div className="w-full">
             {currentStep === 0 && <Track />}
-            {currentStep === 1 && <Details />}
+            {currentStep === 0 && <Details />}
             {currentStep === 2 && <Campaign />}
             {currentStep === 3 && <Payment />}
             <div className="flex w-full items-center justify-end gap-2.5">

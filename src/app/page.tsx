@@ -2,7 +2,7 @@ import Index from "@/containers/Index"
 import DefaultLayout from "@/layouts/defaultLayout"
 import Image from "next/image"
 
-const headerContent = () => {
+const HeaderContent = () => {
     return (
         <Image src="/assets/images/logo.png" alt="makromusic Task Logo" width={263} height={50} priority={true} />
     )
@@ -10,7 +10,7 @@ const headerContent = () => {
 
 export default function Home() {
     return (
-        <DefaultLayout headerContent={headerContent()}>
+        <DefaultLayout header={<HeaderContent />}>
             <Index />
         </DefaultLayout>
     )

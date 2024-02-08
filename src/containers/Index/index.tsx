@@ -1,8 +1,8 @@
 "use client"
 
 import Button from "@/components/Button"
-import { useCampaignStore } from "@/stores/campaignStore"
-import { usePackageStore } from "@/stores/packageStore"
+import { useCampaignStore } from "@/stores/createStore"
+import { usePackageStore } from "@/stores/updateStore"
 import { useRouter } from "next/navigation"
 
 const Index: React.FC = () => {

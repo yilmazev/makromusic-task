@@ -1,7 +1,7 @@
 import { Check } from "@/components/Icons"
 import useDebouncedSearch from "@/hooks/useDebouncedSearch"
 import { apiSearchOnSpotify } from "@/services/api"
-import { usePackageStore } from "@/stores/packageStore"
+import { usePackageStore } from "@/stores/updateStore"
 import clsx from "clsx"
 import Image from "next/image"
 import React, { useEffect, useState } from "react"

@@ -2,7 +2,7 @@
 
 import CreateCampaign from "@/containers/CreateCampaign"
 import DefaultLayout from "@/layouts/defaultLayout"
-import { usePackageStore } from "@/stores/packageStore"
+import { usePackageStore } from "@/stores/updateStore"
 import React, { useEffect } from "react"
 
 const StepIndicator = () => {
@@ -10,7 +10,7 @@ const StepIndicator = () => {
     const currentStep = usePackageStore((state) => state.currentStep)
 
     const stepTitles = [ "Parçan", "Detaylar", "Kampanyan", "Ödeme" ]
-  
+
     useEffect(() => {
         const savedStep = localStorage.getItem("currentStep")
         if (savedStep) {
@@ -38,13 +38,12 @@ const StepIndicator = () => {
     )
 }
 
-  
-const headerContent = () => {
+const HeaderContent = () => {
     return (
         <div className="flex w-full items-center justify-between gap-36">
             <h1 className="text-xl">Kampanya Oluştur</h1>
             <div className="flex items-center gap-4">
-                {StepIndicator()}
+                <StepIndicator />
             </div>
             <div />
         </div>
@@ -53,7 +52,7 @@ const headerContent = () => {
 
 export default function Home() {
     return (
-        <DefaultLayout headerContent={headerContent()}>
+        <DefaultLayout header={<HeaderContent />}>
             <CreateCampaign />
         </DefaultLayout>
     )
