@@ -1,3 +1,4 @@
+import { Spinner } from "@/components/Icons"
 import { useUpdateStore } from "@/stores/updateStore"
 import React, { useEffect, useState } from "react"
 
@@ -29,7 +30,12 @@ const Campaign: React.FC = () => {
 
     return (
         <div>
-            {DynamicPage ? <DynamicPage /> : "Yükleniyor"}
+            {DynamicPage
+                ? <DynamicPage />
+                : <div className="flex w-full justify-center">
+                    <Spinner className="size-12 animate-spin fill-none" />
+                </div>
+            }
         </div>
     )
 }

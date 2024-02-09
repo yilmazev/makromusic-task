@@ -1,4 +1,5 @@
 import Button from "@/components/Button"
+import { Spinner } from "@/components/Icons"
 import { useUpdateStore } from "@/stores/updateStore"
 import React, { useEffect, useState } from "react"
 
@@ -70,14 +71,16 @@ const CreateCampaign: React.FC = () => {
 
     return (
         <div className="w-full">
-            {DynamicPage &&
-                <>
-                    <DynamicPage />
-                    <div className="flex w-full items-center justify-end gap-2.5">
-                        <Button variant="secondary" onClick={handleGoBack} disabled={currentStep === 0}>Geri Dön</Button>
-                        <Button onClick={handleContinue} disabled={!isContinue}>Devam Et</Button>
-                    </div>
-                </> }
+            {DynamicPage
+                ? <DynamicPage />
+                : <div className="flex w-full justify-center">
+                    <Spinner className="size-12 animate-spin fill-none" />
+                </div>
+            }
+            <div className="flex w-full items-center justify-end gap-2.5">
+                <Button variant="secondary" onClick={handleGoBack} disabled={currentStep === 0}>Geri Dön</Button>
+                <Button onClick={handleContinue} disabled={!isContinue}>Devam Et</Button>
+            </div>
         </div>
     )
 }
