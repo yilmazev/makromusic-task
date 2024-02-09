@@ -1,6 +1,6 @@
 import { Times } from "@/components/Icons"
 import { apiTrackGenres } from "@/services/api"
-import { usePackageStore } from "@/stores/updateStore"
+import { useUpdateStore } from "@/stores/updateStore"
 import clsx from "clsx"
 import React, { useEffect, useState } from "react"
 import Select, { MultiValueRemoveProps } from "react-select"
@@ -47,7 +47,7 @@ const Details: React.FC = () => {
     * * - 'track-genres' route'undan gelmesi gerekmekte datanın ve multiple selection yapılabilir olmalı ve buna göre kayıt atmalı. (+)
     */
 
-    const { isLoading, setIsLoading, region, setRegion, trackGenre, setTrackGenre } = usePackageStore()
+    const { isLoading, setIsLoading, region, setRegion, trackGenre, setTrackGenre } = useUpdateStore()
     const [ trackGenres, setTrackGenres ] = useState<string[]>([])
 
     useEffect(() => {

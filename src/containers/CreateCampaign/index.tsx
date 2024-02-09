@@ -1,9 +1,9 @@
 import Button from "@/components/Button"
-import { usePackageStore } from "@/stores/updateStore"
+import { useUpdateStore } from "@/stores/updateStore"
 import React, { useEffect, useState } from "react"
 
 const CreateCampaign: React.FC = () => {
-    const { selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep, setCurrentStep, setStepData } = usePackageStore()
+    const { selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep, setCurrentStep, setStepData } = useUpdateStore()
     const [ isContinue, setIsContinue ] = useState<boolean>(false)
     const [ DynamicPage, setDynamicPage ] = useState<React.ComponentType<any> | null>(null)
 

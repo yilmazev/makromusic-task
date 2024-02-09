@@ -1,7 +1,7 @@
 import { Check } from "@/components/Icons"
 import useDebouncedSearch from "@/hooks/useDebouncedSearch"
 import { apiSearchOnSpotify } from "@/services/api"
-import { usePackageStore } from "@/stores/updateStore"
+import { useUpdateStore } from "@/stores/updateStore"
 import clsx from "clsx"
 import Image from "next/image"
 import React, { useEffect, useState } from "react"
@@ -24,7 +24,7 @@ const Track: React.FC = () => {
     * * - Eğer seçili şarkı yoksa veya checkbox seçili değilse button disabled olmalı (+)
     */
    
-    const { isLoading, setIsLoading, selectedTrack, setSelectedTrack, isTrackNotInAir, setIsTrackNotInAir } = usePackageStore()
+    const { isLoading, setIsLoading, selectedTrack, setSelectedTrack, isTrackNotInAir, setIsTrackNotInAir } = useUpdateStore()
     const [ searchQuery, setSearchQuery ] = useState("")
     const [ searchResults, setSearchResults ] = useState<Options[]>([])
     const debounce = useDebouncedSearch(500)

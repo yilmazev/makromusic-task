@@ -3,7 +3,7 @@
 import { create } from "zustand"
 import { combine } from "zustand/middleware"
 
-type PackageStore = {
+type UpdateStore = {
     isLoading: boolean
     isTrackNotInAir: boolean
     selectedTrack: any
@@ -22,7 +22,7 @@ type PackageStore = {
     setStepData: (selectedTrack: any, isTrackNotInAir: boolean, region: string, trackGenre: string[], selectedPackage: any, currentStep: number) => void
 }
 
-export const usePackageStore = create<PackageStore>(
+export const useUpdateStore = create<UpdateStore>(
     combine(
         {
             isLoading: false,
@@ -31,7 +31,7 @@ export const usePackageStore = create<PackageStore>(
             region: "",
             trackGenre: [] as string[],
             selectedPackage: null,
-            currentStep: JSON.parse(localStorage.getItem("stepData") || "0").currentStep,
+            currentStep: 0,
             stepData: [] as string[],
         },
         (set) => ({
@@ -56,15 +56,17 @@ export const usePackageStore = create<PackageStore>(
     )
 )
 
-usePackageStore.subscribe((state) => {
-    const stepData = {
-        isTrackNotInAir: state.isTrackNotInAir,
-        selectedTrack: state.selectedTrack,
-        region: state.region,
-        trackGenre: state.trackGenre,
-        selectedPackage: state.selectedPackage,
-        currentStep: state.currentStep,
-    }
+if (typeof window !== "undefined") {
+    useUpdateStore.subscribe((state) => {
+        const stepData = {
+            isTrackNotInAir: state.isTrackNotInAir,
+            selectedTrack: state.selectedTrack,
+            region: state.region,
+            trackGenre: state.trackGenre,
+            selectedPackage: state.selectedPackage,
+            currentStep: state.currentStep,
+        }
 
-    localStorage.setItem("stepData", JSON.stringify(stepData))
-})
+        localStorage.setItem("stepData", JSON.stringify(stepData))
+    })
+}

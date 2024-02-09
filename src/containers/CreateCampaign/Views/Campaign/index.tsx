@@ -1,8 +1,8 @@
-import { usePackageStore } from "@/stores/updateStore"
+import { useUpdateStore } from "@/stores/updateStore"
 import React, { useEffect, useState } from "react"
 
 const Campaign: React.FC = () => {
-    const { currentStep } = usePackageStore()
+    const { currentStep } = useUpdateStore()
     const [ DynamicPage, setDynamicPage ] = useState<React.ComponentType<any> | null>(null)
 
     const getPageName = (step: number) => {

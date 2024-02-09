@@ -4,7 +4,7 @@ import { apiCreateCampaign } from "@/services/api"
 import { create } from "zustand"
 import { combine } from "zustand/middleware"
 
-type CampaignStore = {
+type CreateStore = {
     isLoading: boolean
     campaignData: null | undefined | any
     createCampaign: () => Promise<void>
@@ -15,7 +15,7 @@ type CampaignStore = {
  * localStorage ve sessionStorage birlikte kullanılacak, kodlar içerisine ve konsola not düşürülecek.
 */
 
-export const useCampaignStore = create<CampaignStore>(
+export const useCreateStore = create<CreateStore>(
     combine(
         {
             isLoading: false,

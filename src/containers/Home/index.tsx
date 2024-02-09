@@ -1,8 +1,8 @@
 "use client"
 
 import Button from "@/components/Button"
-import { useCampaignStore } from "@/stores/createStore"
-import { usePackageStore } from "@/stores/updateStore"
+import { useCreateStore } from "@/stores/createStore"
+import { useUpdateStore } from "@/stores/updateStore"
 import { useRouter } from "next/navigation"
 
 const Home: React.FC = () => {
@@ -12,8 +12,8 @@ const Home: React.FC = () => {
     */
 
     const router = useRouter()
-    const { isLoading, createCampaign, campaignData } = useCampaignStore()
-    const { setCurrentStep } = usePackageStore()
+    const { isLoading, createCampaign } = useCreateStore()
+    const { setCurrentStep } = useUpdateStore()
 
     // Kampanya oluştur
     const handleCreateCampaign = async () => {

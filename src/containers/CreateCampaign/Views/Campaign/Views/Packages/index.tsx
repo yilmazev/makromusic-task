@@ -1,5 +1,5 @@
 import { apiGetPackages } from "@/services/api"
-import { usePackageStore } from "@/stores/updateStore"
+import { useUpdateStore } from "@/stores/updateStore"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 
@@ -18,7 +18,7 @@ const Packages: React.FC = () => {
      * * - 'get-packages' route ile çekilmesi lazım, default selected olarak en pahalı paketin seçilmesi gerekiyor, datalar region:currency'e göre filtrelenmiş bir şekilde gösterilmesi lazım. (+)
      */
     
-    const { region, selectedPackage, setSelectedPackage } = usePackageStore()
+    const { region, selectedPackage, setSelectedPackage } = useUpdateStore()
     const [ packages, setPackages ] = useState<Package[]>([])
 
     useEffect(() => {

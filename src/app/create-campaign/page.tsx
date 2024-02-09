@@ -2,12 +2,12 @@
 
 import CreateCampaign from "@/containers/CreateCampaign"
 import DefaultLayout from "@/layouts/defaultLayout"
-import { usePackageStore } from "@/stores/updateStore"
+import { useUpdateStore } from "@/stores/updateStore"
 import React, { useEffect } from "react"
 
 const StepIndicator = () => {
-    const setCurrentStep = usePackageStore((state) => state.setCurrentStep)
-    const currentStep = usePackageStore((state) => state.currentStep)
+    const setCurrentStep = useUpdateStore((state) => state.setCurrentStep)
+    const currentStep = useUpdateStore((state) => state.currentStep)
 
     const stepTitles = [ "Parçan", "Detaylar", "Kampanyan", "Ödeme" ]
 
