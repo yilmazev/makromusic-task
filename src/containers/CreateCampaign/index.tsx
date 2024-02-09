@@ -1,55 +1,83 @@
 import Button from "@/components/Button"
 import { usePackageStore } from "@/stores/updateStore"
 import React, { useEffect, useState } from "react"
-import Campaign from "./Views/Campaign"
-import Details from "./Views/Details"
-import Payment from "./Views/Payment"
-import Track from "./Views/Track"
 
 const CreateCampaign: React.FC = () => {
-    /**
-     * ! Multistep dynamic hale getirilecek
-     * ! Sayfalar router halinde yapılacak
-     */
-
-    const { currentStep, selectedTrack, isTrackNotInAir, setStep, setStepData } = usePackageStore()
+    const { selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep, setCurrentStep, setStepData } = usePackageStore()
     const [ isContinue, setIsContinue ] = useState<boolean>(false)
+    const [ DynamicPage, setDynamicPage ] = useState<React.ComponentType<any> | null>(null)
 
-    const checkIsContinue = (step: number, notInAir: boolean, track: any) => {
-        return step === 0 && ((notInAir && track === null) || (!notInAir && track !== null))
+    const handleContinue = () => (isContinue) && setCurrentStep(currentStep + 1)
+
+    const handleGoBack = () => (currentStep > 0) && setCurrentStep(currentStep - 1)
+
+    const getPageName = (step: number) => {
+        switch (step) {
+        case 0:
+            return "Track"
+        case 1:
+            return "Details"
+        case 2:
+            return "Campaign"
+        case 3:
+            return "Payment"
+        default:
+            return ""
+        }
     }
 
-    const handleContinue = () => isContinue && setStep(currentStep + 1)
-    const handleGoBack = () => currentStep > 0 && setStep(currentStep - 1)
-
     useEffect(() => {
-        setIsContinue(checkIsContinue(currentStep, isTrackNotInAir, selectedTrack))
-    }, [ selectedTrack, isTrackNotInAir, currentStep ])
+        const loadDynamicPage = async () => {
+            const module = await import(`./Views/${getPageName(currentStep)}`)
+            setDynamicPage(() => module.default)
+        }
+
+        loadDynamicPage()
+    }, [ currentStep ])
+
+    const checkIsContinue = () => {
+        // Parça
+        if (currentStep === 0) {
+            const isTrackSelected = (isTrackNotInAir && selectedTrack === null) || (!isTrackNotInAir && selectedTrack !== null)
+            return isTrackSelected
+        }
+
+        // Detaylar
+        if (currentStep === 1) {
+            const isDetailsValid = ((region === "Türkiye") || (region === "Global")) && (trackGenre.length > 0)
+            return isDetailsValid
+        }
+
+        // Paket seç
+        if (currentStep === 2) {
+            const isDetailsValid = (selectedPackage)
+            return isDetailsValid
+        }
+        return false
+    }
+    
+    useEffect(() => {
+        setIsContinue(checkIsContinue())
+    }, [ selectedTrack, isTrackNotInAir, region, trackGenre, currentStep ])
 
     useEffect(() => {
         const storedStepData = localStorage.getItem("stepData")
         if (storedStepData) {
-            const { selectedTrack, isTrackNotInAir, currentStep } = JSON.parse(storedStepData)
-            setStepData(selectedTrack, isTrackNotInAir, currentStep)
+            const { selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep } = JSON.parse(storedStepData)
+            setStepData(selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep)
         }
     }, [])
 
-    //const themeName = 'default';
-    //
-    //const ThemeHomePage = dynamic(() => import(`@/components/theme/${themeName}/pages/homepage`), {
-    //    ssr: false,
-    //});
-
     return (
         <div className="w-full">
-            {currentStep === 0 && <Track />}
-            {currentStep === 1 && <Details />}
-            {currentStep === 2 && <Campaign />}
-            {currentStep === 3 && <Payment />}
-            <div className="flex w-full items-center justify-end gap-2.5">
-                <Button variant="secondary" onClick={handleGoBack} disabled={currentStep === 0}>Geri Dön</Button>
-                <Button onClick={handleContinue} disabled={!isContinue}>Devam Et</Button>
-            </div>
+            {DynamicPage &&
+                <>
+                    <DynamicPage />
+                    <div className="flex w-full items-center justify-end gap-2.5">
+                        <Button variant="secondary" onClick={handleGoBack} disabled={currentStep === 0}>Geri Dön</Button>
+                        <Button onClick={handleContinue} disabled={!isContinue}>Devam Et</Button>
+                    </div>
+                </> }
         </div>
     )
 }

@@ -17,6 +17,7 @@ const config: Config = {
                 },
                 surface: "#E9EBF0",
                 borderGray: "#ECEEEB",
+                priceGray: "#344054",
             },
         }
     },

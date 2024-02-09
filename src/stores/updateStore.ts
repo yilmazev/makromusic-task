@@ -4,43 +4,53 @@ import { create } from "zustand"
 import { combine } from "zustand/middleware"
 
 type PackageStore = {
-    isLoading: boolean;
-    selectedTrack: null | any;
-    isTrackNotInAir: boolean;
-    searchQuery: string;
-    currentStep: number;
-    setSearchQuery: (query: string) => void;
-    setSelectedTrack: (track: any) => void;
-    setIsTrackNotInAir: (value: boolean) => void;
-    setStep: (step: number) => void;
-    setStepData: (selectedTrack: any, isTrackNotInAir: boolean, currentStep: number) => void;
-    setIsLoading: (isLoading: boolean) => void;
+    isLoading: boolean
+    isTrackNotInAir: boolean
+    selectedTrack: any
+    region: string
+    trackGenre: string[]
+    selectedPackage: any
+    currentStep: number
+    stepData: string[]
+    setIsLoading: (isLoading: boolean) => void
+    setIsTrackNotInAir: (isTrackNotInAir: boolean) => void
+    setSelectedTrack: (selectedTrack: any) => void
+    setRegion: (region: string) => void
+    setTrackGenre: (trackGenre: string[]) => void
+    setSelectedPackage: (selectedPackage: any) => void
+    setCurrentStep: (currentStep: number) => void
+    setStepData: (selectedTrack: any, isTrackNotInAir: boolean, region: string, trackGenre: string[], selectedPackage: any, currentStep: number) => void
 }
 
 export const usePackageStore = create<PackageStore>(
     combine(
         {
             isLoading: false,
-            selectedTrack: null,
             isTrackNotInAir: false,
-            searchQuery: "",
+            selectedTrack: null,
+            region: "",
+            trackGenre: [] as string[],
+            selectedPackage: null,
             currentStep: JSON.parse(localStorage.getItem("stepData") || "0").currentStep,
+            stepData: [] as string[],
         },
         (set) => ({
             setIsLoading: (isLoading) => set({ isLoading }),
-            setSearchQuery: (query: string) => set({ searchQuery: query }),
-            setSelectedTrack: (track) => set({ selectedTrack: track }),
-            setIsTrackNotInAir: (value) => set({ isTrackNotInAir: value }),
-            setStep: (step: number) => set({ currentStep: step }),
-            setStepData: (selectedTrack, isTrackNotInAir, currentStep) => {
-                const stepData = {
+            setIsTrackNotInAir: (isTrackNotInAir) => set({ isTrackNotInAir }),
+            setSelectedTrack: (selectedTrack) => set({ selectedTrack }),
+            setRegion: (region) => set({ region }),
+            setTrackGenre: (trackGenre) => set({ trackGenre }),
+            setSelectedPackage: (selectedPackage) => set({ selectedPackage }),
+            setCurrentStep: (currentStep) => set({ currentStep }),
+            setStepData: (selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep) => {
+                set({
                     selectedTrack,
                     isTrackNotInAir,
+                    region,
+                    trackGenre,
+                    selectedPackage,
                     currentStep,
-                }
-
-                set(stepData)
-                localStorage.setItem("stepData", JSON.stringify(stepData))
+                })
             },
         })
     )
@@ -50,6 +60,9 @@ usePackageStore.subscribe((state) => {
     const stepData = {
         isTrackNotInAir: state.isTrackNotInAir,
         selectedTrack: state.selectedTrack,
+        region: state.region,
+        trackGenre: state.trackGenre,
+        selectedPackage: state.selectedPackage,
         currentStep: state.currentStep,
     }
 

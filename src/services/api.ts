@@ -28,3 +28,12 @@ export const apiTrackGenres = async () => {
         return []
     }
 }
+
+export const apiGetPackages = async () => {
+    try {
+        const response = await axios.get(`${apiEndpoint}/get-packages`)
+        return response.data
+    } catch (error) {
+        return []
+    }
+}

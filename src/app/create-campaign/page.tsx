@@ -6,7 +6,7 @@ import { usePackageStore } from "@/stores/updateStore"
 import React, { useEffect } from "react"
 
 const StepIndicator = () => {
-    const setStep = usePackageStore((state) => state.setStep)
+    const setCurrentStep = usePackageStore((state) => state.setCurrentStep)
     const currentStep = usePackageStore((state) => state.currentStep)
 
     const stepTitles = [ "Parçan", "Detaylar", "Kampanyan", "Ödeme" ]
@@ -14,15 +14,15 @@ const StepIndicator = () => {
     useEffect(() => {
         const savedStep = localStorage.getItem("currentStep")
         if (savedStep) {
-            setStep(Number(savedStep))
+            setCurrentStep(Number(savedStep))
         }
-    }, [ setStep ])
+    }, [ setCurrentStep ])
 
     return (
         <>
             {stepTitles.map((title, index) => (
                 <React.Fragment key={index}>
-                    <p className="text-gray-400">{title}</p>
+                    <p className="tracking-[-0.04rem] text-gray-400">{title}</p>
                     <div className="h-1 w-8 rounded-2xl bg-gray-200">
                         <div
                             className={`h-full rounded-2xl bg-primary-600 transition-all duration-500 ${
@@ -41,7 +41,7 @@ const StepIndicator = () => {
 const HeaderContent = () => {
     return (
         <div className="flex w-full items-center justify-between gap-36">
-            <h1 className="text-xl">Kampanya Oluştur</h1>
+            <h1 className="text-xl tracking-[-0.04rem]">Kampanya Oluştur</h1>
             <div className="flex items-center gap-4">
                 <StepIndicator />
             </div>

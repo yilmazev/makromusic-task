@@ -6,21 +6,21 @@ import { usePackageStore } from "@/stores/updateStore"
 import { useRouter } from "next/navigation"
 
 const Home: React.FC = () => {
-    /*
-        Notlar:
-        - Kampanya oluştura tıkladıktan sonra 'create-campaign' endpointine istek at (+)
+    /**
+    * * Notlar:
+    * * - Kampanya oluştura tıkladıktan sonra 'create-campaign' endpointine istek at
     */
 
     const router = useRouter()
     const { isLoading, createCampaign, campaignData } = useCampaignStore()
-    const { setStep } = usePackageStore()
+    const { setCurrentStep } = usePackageStore()
 
     // Kampanya oluştur
     const handleCreateCampaign = async () => {
         await createCampaign()
         
         if (!isLoading) {
-            setStep(0)
+            setCurrentStep(0)
             router.push("/create-campaign")
         }
     }

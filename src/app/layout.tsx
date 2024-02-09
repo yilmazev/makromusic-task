@@ -3,8 +3,8 @@ import type { Metadata } from "next"
 import { Alata } from "next/font/google"
 
 const alata = Alata({
+    weight: [ "400" ],
     subsets: [ "latin" ],
-    weight: "400"
 })
 
 export const metadata: Metadata = {
