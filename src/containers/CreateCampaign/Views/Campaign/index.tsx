@@ -29,7 +29,7 @@ const Campaign: React.FC = () => {
 
     return (
         <div>
-            {DynamicPage && <DynamicPage /> }
+            {DynamicPage ? <DynamicPage /> : "Yükleniyor"}
         </div>
     )
 }
