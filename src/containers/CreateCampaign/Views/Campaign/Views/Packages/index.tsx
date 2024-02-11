@@ -1,7 +1,7 @@
-import { apiGetPackages } from "@/services/api";
-import { useUpdateStore } from "@/stores/updateStore";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { apiGetPackages } from "@/services/api"
+import { useUpdateStore } from "@/stores/updateStore"
+import axios from "axios"
+import React, { useEffect, useState } from "react"
 
 interface Package {
     id: number;
@@ -65,7 +65,7 @@ const Packages: React.FC = () => {
         if(!isRequest) {
             fetchPackages()
         }
-    }, [isRequest])
+    }, [ isRequest ])
 
     return (
         <div className="mb-8 rounded-3xl border border-gray-200 bg-white p-6">

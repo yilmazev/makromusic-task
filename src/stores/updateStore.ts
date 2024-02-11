@@ -22,6 +22,21 @@ type UpdateStore = {
     setStepData: (selectedTrack: any, isTrackNotInAir: boolean, region: string, trackGenre: string[], selectedPackage: any, currentStep: number) => void
 }
 
+const safeLocalStorage = {
+    getItem: (key: string, defaultValue: any) => {
+        if (typeof window !== "undefined") {
+            const storedData = localStorage.getItem(key)
+            return storedData ? JSON.parse(storedData) : defaultValue
+        }
+        return defaultValue
+    },
+    setItem: (key: string, value: any) => {
+        if (typeof window !== "undefined") {
+            localStorage.setItem(key, JSON.stringify(value))
+        }
+    },
+}
+
 export const useUpdateStore = create<UpdateStore>(
     combine(
         {
@@ -31,7 +46,7 @@ export const useUpdateStore = create<UpdateStore>(
             region: "",
             trackGenre: [] as string[],
             selectedPackage: null,
-            currentStep: JSON.parse(localStorage.getItem("stepData") || '{"currentStep": 0}').currentStep,
+            currentStep: safeLocalStorage.getItem("stepData", { currentStep: 0 }).currentStep,
             stepData: [] as string[],
         },
         (set) => ({
