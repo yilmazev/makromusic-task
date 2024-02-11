@@ -1,6 +1,6 @@
-import { apiGetDates } from "@/services/api";
-import { useUpdateStore } from "@/stores/updateStore";
-import React, { useEffect, useState } from "react";
+import { apiGetDates } from "@/services/api"
+import { useUpdateStore } from "@/stores/updateStore"
+import React, { useEffect, useState } from "react"
 
 interface Date {
     id: number;
