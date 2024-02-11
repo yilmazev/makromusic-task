@@ -3,19 +3,20 @@ import { ButtonHTMLAttributes, ReactNode } from "react"
 import { Spinner } from "../Icons"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "tertiary";
   size?: "small" | "medium" | "large";
-  isLoading?: boolean | false;
-  disabled?: boolean | false;
+  isFull?: boolean;
+  isLoading?: boolean;
+  disabled?: boolean;
   children: ReactNode;
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
-    const { variant = "primary", size = "medium", isLoading, disabled, children, ...rest } = props
+    const { variant = "primary", size = "small", isFull = false, isLoading = false, disabled, children, ...rest } = props
 
     const sizeClasses = {
-        small: "text-xs px-2 py-1",
-        medium: "text-sm px-8 py-2 tracking-[-0.02rem]",
+        small: "text-sm px-8 py-2 tracking-[-0.02rem]",
+        medium: "text-sm px-9 py-[10px]",
         large: "text-xl px-5 py-3",
     }
 
@@ -28,6 +29,8 @@ const Button: React.FC<ButtonProps> = (props) => {
         {
             "bg-primary-600 text-white": variant === "primary",
             "bg-surface text-black": variant === "secondary",
+            "bg-transparent text-gray-700 !p-0": variant === "tertiary",
+            "w-full": isFull === true,
             "disabled:opacity-50 disabled:cursor-default": disabled === true,
             [sizeClasses[size]]: sizeClasses[size],
         },

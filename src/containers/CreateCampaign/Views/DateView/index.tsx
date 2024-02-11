@@ -12,6 +12,12 @@ interface Date {
 }
 
 const DateView: React.FC = () => {
+    /**
+     * * Notlar:
+     * * -'get-dates' route'undan alınması gerekiyor. Default olarak ücretli tarihin seçilmesi gerekiyor. Eğer region Global ise tüm date'ler 'TRY' tanımlandığı için bu adımı direkt olarak atlaması bekleniyor.
+     * ! Typescript options hatası kontrol edilecek
+     */
+    
     const { selectedDate, setSelectedDate } = useUpdateStore()
     const [ dates, setDates ] = useState<Date[]>([])
 
@@ -40,14 +46,15 @@ const DateView: React.FC = () => {
     const formatDateRange = (dateRange: string[]) => {
         const startDate = new Date(dateRange[0])
         const endDate = new Date(dateRange[1])
-        
-        const options = { month: "long", day: "numeric" }
-        
+    
+        const options = { month: "long", day: "numeric" } as Intl.DateTimeFormatOptions
+    
         const formattedStartDate = startDate.toLocaleDateString("tr-TR", options)
         const formattedEndDate = endDate.toLocaleDateString("tr-TR", options)
     
         return `${formattedStartDate} - ${formattedEndDate}`
     }
+    
 
     return (
         <div className="mb-8 rounded-3xl border border-gray-200 bg-white p-6">
@@ -74,7 +81,7 @@ const DateView: React.FC = () => {
                                     <span className="mb-0.5 tracking-[-0.02rem] text-gray-900">{formatDateRange(item.date_range)}</span>
                                     <p className="text-sm tracking-[-0.02rem] text-gray-500">{item.description}</p>
                                 </div>
-                                <span className="text-right font-semibold tracking-[-0.02rem] text-priceGray">
+                                <span className="text-right tracking-[-0.02rem] text-priceGray">
                                     {item.price === 0
                                         ? "Ücretsiz"
                                         : "₺" + item.price

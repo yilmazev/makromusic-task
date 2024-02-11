@@ -41,12 +41,6 @@ const MultiValueRemove: React.FC<MultiValueRemoveProps> = React.memo((props) => 
 
 
 const DetailsView: React.FC = () => {
-    /** 
-    * * Notlar:
-    * * - Burada 'region' string olarak gönderilmeli, keyleri önemli değil fakat burda belirlenenen region'a göre bir sonraki adımda paket gösterimi yapılması gerekiyor. Burası checkbox şeklindedir, Global veya Turkiye'den bir tanesi seçilebilmektedir. (+)
-    * * - 'track-genres' route'undan gelmesi gerekmekte datanın ve multiple selection yapılabilir olmalı ve buna göre kayıt atmalı. (+)
-    */
-
     const { region, setRegion, trackGenre, setTrackGenre, setSelectedPackage } = useUpdateStore()
     const [ isLoading, setIsLoading ] = useState<boolean>(false)
     const [ trackGenres, setTrackGenres ] = useState<string[]>([])

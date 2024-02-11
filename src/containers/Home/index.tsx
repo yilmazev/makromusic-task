@@ -6,11 +6,6 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 const Home: React.FC = () => {
-    /**
-    * * Notlar:
-    * * - Kampanya oluştura tıkladıktan sonra 'create-campaign' endpointine istek at
-    */
-
     const router = useRouter()
     const { createCampaign } = useCreateStore()
 

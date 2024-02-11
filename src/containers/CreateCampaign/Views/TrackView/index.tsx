@@ -17,13 +17,6 @@ interface Options {
 }
 
 const TrackView: React.FC = () => {
-    /**
-    * * Notlar:
-    * * - React-select kütüphanesi kullanılacak (+)
-    * * - Eğer checkbox seçiliyse, search disabled olacak ve null gönderilecek (+)
-    * * - Eğer seçili şarkı yoksa veya checkbox seçili değilse button disabled olmalı (+)
-    */
-   
     const { selectedTrack, setSelectedTrack, isTrackNotInAir, setIsTrackNotInAir } = useUpdateStore()
     const [ searchQuery, setSearchQuery ] = useState("")
     const [ searchResults, setSearchResults ] = useState<Options[]>([])

@@ -62,7 +62,7 @@ const CreateCampaign: React.FC = () => {
         }    
         
         setIsContinue(checkIsContinue())
-    }, [ selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep ])
+    }, [ selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, selectedDate, currentStep ])
 
     return (
         <div className="w-full">
@@ -75,10 +75,11 @@ const CreateCampaign: React.FC = () => {
             >
                 {isStepLoaded && getStepContent()}
             </Suspense>
-            <div className="flex w-full items-center justify-end gap-2.5">
-                <Button variant="secondary" onClick={handleGoBack} disabled={currentStep === 0}>Geri Dön</Button>
-                <Button onClick={handleContinue} disabled={!isContinue}>Devam Et</Button>
-            </div>
+            {currentStep < 4 &&
+                 <div className="flex w-full items-center justify-end gap-2.5">
+                     <Button variant="secondary" onClick={handleGoBack} disabled={currentStep === 0}>Geri Dön</Button>
+                     <Button onClick={handleContinue} disabled={!isContinue}>Devam Et</Button>
+                 </div> }
         </div>
     )
 }

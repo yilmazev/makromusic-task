@@ -12,11 +12,6 @@ interface Package {
 }
 
 const PackagesView: React.FC = () => {
-    /**
-     * * Notlar:
-     * * - 'get-packages' route ile çekilmesi lazım, default selected olarak en pahalı paketin seçilmesi gerekiyor, datalar region:currency'e göre filtrelenmiş bir şekilde gösterilmesi lazım. (+)
-     */
-    
     const { region, selectedPackage, setSelectedPackage } = useUpdateStore()
     const [ packages, setPackages ] = useState<Package[]>([])
     const [ currency, setCurrency ] = useState<string>("")
