@@ -71,7 +71,7 @@ const PackagesView: React.FC = () => {
                             className="peer"
                             hidden
                         />
-                        <label htmlFor={`package-${item.id}`}  className="block w-full cursor-pointer rounded-xl border border-gray-200 p-4 text-gray-900 transition-all peer-checked:border-primary-600 peer-checked:bg-primary-25">
+                        <label htmlFor={`package-${item.id}`} className="block w-full cursor-pointer rounded-xl border border-gray-200 p-4 text-gray-900 transition-all peer-checked:border-primary-600 peer-checked:bg-primary-25">
                             <span className="mb-1 text-sm tracking-[-0.02rem] text-primary-600">{item.name}</span>
                             <div className="flex items-end justify-between">
                                 <div className="flex flex-col">
