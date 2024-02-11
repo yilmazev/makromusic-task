@@ -3,20 +3,11 @@
 import CreateCampaign from "@/containers/CreateCampaign"
 import DefaultLayout from "@/layouts/defaultLayout"
 import { useUpdateStore } from "@/stores/updateStore"
-import React, { useEffect } from "react"
+import React from "react"
 
 const StepIndicator = () => {
-    const setCurrentStep = useUpdateStore((state) => state.setCurrentStep)
-    const currentStep = useUpdateStore((state) => state.currentStep)
-
+    const { currentStep } = useUpdateStore()
     const stepTitles = [ "Parçan", "Detaylar", "Kampanyan", "Ödeme" ]
-
-    useEffect(() => {
-        const savedStep = localStorage.getItem("currentStep")
-        if (savedStep) {
-            setCurrentStep(Number(savedStep))
-        }
-    }, [ setCurrentStep ])
 
     return (
         <>

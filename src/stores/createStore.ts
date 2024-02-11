@@ -1,30 +1,17 @@
-"use client"
-
 import { apiCreateCampaign } from "@/services/api"
 import { create } from "zustand"
-import { combine } from "zustand/middleware"
+import { PersistOptions, persist } from "zustand/middleware"
 
 type CreateStore = {
-    isLoading: boolean
     campaignData: null | undefined | any
     createCampaign: () => Promise<void>
 }
 
-/**
- * TODO: 
- * localStorage ve sessionStorage birlikte kullanılacak, kodlar içerisine ve konsola not düşürülecek.
-*/
-
 export const useCreateStore = create<CreateStore>(
-    combine(
-        {
-            isLoading: false,
-            campaignData: null,
-        },
+    persist<CreateStore>(
         (set) => ({
+            campaignData: null,
             createCampaign: async () => {
-                set({ isLoading: true })
-
                 try {
                     const response = await apiCreateCampaign()
                     const data: any = response
@@ -33,13 +20,12 @@ export const useCreateStore = create<CreateStore>(
                         throw new Error(data.error)
                     }
 
-                    set({ campaignData: data })
-                    localStorage.setItem("campaignData", JSON.stringify(data))
+                    set((state) => ({ ...state, campaignData: data }))
                 } catch (error) {
                     console.error(error)
-                    set({ isLoading: false })
                 }
             },
-        })
-    )
+        }),
+        { name: "campaignData" } as PersistOptions<CreateStore>
+    ) as any
 )

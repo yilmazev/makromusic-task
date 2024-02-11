@@ -24,9 +24,10 @@ const Track: React.FC = () => {
     * * - Eğer seçili şarkı yoksa veya checkbox seçili değilse button disabled olmalı (+)
     */
    
-    const { isLoading, setIsLoading, selectedTrack, setSelectedTrack, isTrackNotInAir, setIsTrackNotInAir } = useUpdateStore()
+    const { selectedTrack, setSelectedTrack, isTrackNotInAir, setIsTrackNotInAir } = useUpdateStore()
     const [ searchQuery, setSearchQuery ] = useState("")
     const [ searchResults, setSearchResults ] = useState<Options[]>([])
+    const [ isLoading, setIsLoading ] = useState<boolean>(false)
     const debounce = useDebouncedSearch(500)
     
     // Gecikmeli arama

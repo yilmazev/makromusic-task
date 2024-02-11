@@ -1,87 +1,37 @@
-"use client"
-
 import { create } from "zustand"
-import { combine } from "zustand/middleware"
+import { persist, PersistOptions } from "zustand/middleware"
 
 type UpdateStore = {
-    isLoading: boolean
     isTrackNotInAir: boolean
     selectedTrack: any
     region: string
     trackGenre: string[]
     selectedPackage: any
     currentStep: number
-    stepData: string[]
-    setIsLoading: (isLoading: boolean) => void
     setIsTrackNotInAir: (isTrackNotInAir: boolean) => void
     setSelectedTrack: (selectedTrack: any) => void
     setRegion: (region: string) => void
     setTrackGenre: (trackGenre: string[]) => void
     setSelectedPackage: (selectedPackage: any) => void
     setCurrentStep: (currentStep: number) => void
-    setStepData: (selectedTrack: any, isTrackNotInAir: boolean, region: string, trackGenre: string[], selectedPackage: any, currentStep: number) => void
-}
-
-const safeLocalStorage = {
-    getItem: (key: string, defaultValue: any) => {
-        if (typeof window !== "undefined") {
-            const storedData = localStorage.getItem(key)
-            return storedData ? JSON.parse(storedData) : defaultValue
-        }
-        return defaultValue
-    },
-    setItem: (key: string, value: any) => {
-        if (typeof window !== "undefined") {
-            localStorage.setItem(key, JSON.stringify(value))
-        }
-    },
 }
 
 export const useUpdateStore = create<UpdateStore>(
-    combine(
-        {
-            isLoading: false,
+  persist<UpdateStore>(
+      (set) => ({
             isTrackNotInAir: false,
             selectedTrack: null,
             region: "",
-            trackGenre: [] as string[],
+            trackGenre: [],
             selectedPackage: null,
-            currentStep: safeLocalStorage.getItem("stepData", { currentStep: 0 }).currentStep,
-            stepData: [] as string[],
-        },
-        (set) => ({
-            setIsLoading: (isLoading) => set({ isLoading }),
+            currentStep: 0,
             setIsTrackNotInAir: (isTrackNotInAir) => set({ isTrackNotInAir }),
             setSelectedTrack: (selectedTrack) => set({ selectedTrack }),
             setRegion: (region) => set({ region }),
             setTrackGenre: (trackGenre) => set({ trackGenre }),
             setSelectedPackage: (selectedPackage) => set({ selectedPackage }),
             setCurrentStep: (currentStep) => set({ currentStep }),
-            setStepData: (selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep) => {
-                set({
-                    selectedTrack,
-                    isTrackNotInAir,
-                    region,
-                    trackGenre,
-                    selectedPackage,
-                    currentStep,
-                })
-            },
-        })
-    )
+        }),
+        { name: "stepData" } as PersistOptions<UpdateStore>
+    ) as any
 )
-
-if (typeof window !== "undefined") {
-    useUpdateStore.subscribe((state) => {
-        const stepData = {
-            isTrackNotInAir: state.isTrackNotInAir,
-            selectedTrack: state.selectedTrack,
-            region: state.region,
-            trackGenre: state.trackGenre,
-            selectedPackage: state.selectedPackage,
-            currentStep: state.currentStep,
-        }
-
-        localStorage.setItem("stepData", JSON.stringify(stepData))
-    })
-}

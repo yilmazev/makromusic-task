@@ -2,8 +2,8 @@
 
 import Button from "@/components/Button"
 import { useCreateStore } from "@/stores/createStore"
-import { useUpdateStore } from "@/stores/updateStore"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 const Home: React.FC = () => {
     /**
@@ -12,16 +12,19 @@ const Home: React.FC = () => {
     */
 
     const router = useRouter()
-    const { isLoading, createCampaign } = useCreateStore()
-    const { setCurrentStep } = useUpdateStore()
+    const { createCampaign } = useCreateStore()
+
+    const [ isLoading, setIsLoading ] = useState<boolean>(false)
 
     // Kampanya oluştur
     const handleCreateCampaign = async () => {
-        await createCampaign()
-        
-        if (!isLoading) {
-            setCurrentStep(0)
+        setIsLoading(true)
+
+        try {
+            await createCampaign()
             router.push("/create-campaign")
+        } catch {
+            setIsLoading(false)
         }
     }
 

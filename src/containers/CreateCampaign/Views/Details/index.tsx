@@ -47,7 +47,8 @@ const Details: React.FC = () => {
     * * - 'track-genres' route'undan gelmesi gerekmekte datanın ve multiple selection yapılabilir olmalı ve buna göre kayıt atmalı. (+)
     */
 
-    const { isLoading, setIsLoading, region, setRegion, trackGenre, setTrackGenre } = useUpdateStore()
+    const { region, setRegion, trackGenre, setTrackGenre } = useUpdateStore()
+    const [ isLoading, setIsLoading ] = useState<boolean>(false)
     const [ trackGenres, setTrackGenres ] = useState<string[]>([])
 
     useEffect(() => {

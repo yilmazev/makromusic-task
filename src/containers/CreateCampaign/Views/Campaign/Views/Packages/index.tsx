@@ -24,9 +24,9 @@ const Packages: React.FC = () => {
     const [ currency, setCurrency ] = useState<string>("")
 
     useEffect(() => {
-        setIsRequest(true)
-        
         const fetchPackages = async () => {
+            setIsRequest(true)
+            
             try {
                 const response = await apiGetPackages()
     
@@ -62,10 +62,8 @@ const Packages: React.FC = () => {
             }
         }
     
-        if(!isRequest) {
-            fetchPackages()
-        }
-    }, [ isRequest ])
+        fetchPackages()
+    }, [ isRequest, region ])
 
     return (
         <div className="mb-8 rounded-3xl border border-gray-200 bg-white p-6">

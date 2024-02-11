@@ -4,7 +4,7 @@ import { useUpdateStore } from "@/stores/updateStore"
 import React, { useEffect, useState } from "react"
 
 const CreateCampaign: React.FC = () => {
-    const { selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep, setCurrentStep, setStepData } = useUpdateStore()
+    const { selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep, setCurrentStep } = useUpdateStore()
     const [ isContinue, setIsContinue ] = useState<boolean>(false)
     const [ DynamicPage, setDynamicPage ] = useState<React.ComponentType<any> | null>(null)
 
@@ -60,14 +60,6 @@ const CreateCampaign: React.FC = () => {
     useEffect(() => {
         setIsContinue(checkIsContinue())
     }, [ selectedTrack, isTrackNotInAir, region, trackGenre, currentStep ])
-
-    useEffect(() => {
-        const storedStepData = localStorage.getItem("stepData")
-        if (storedStepData) {
-            const { selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep } = JSON.parse(storedStepData)
-            setStepData(selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep)
-        }
-    }, [])
 
     return (
         <div className="w-full">
