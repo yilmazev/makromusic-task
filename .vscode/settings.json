@@ -1,10 +1,7 @@
 {
-    "typescript.tsdk": "node_modules\\typescript\\lib",
     "typescript.preferences.quoteStyle": "double",
-    "editor.wordWrap": "off",
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true,
-        "source.fixAll.sortJSON": false,
+        "source.fixAll.sortJSON": true,
         "source.organizeImports": true
     },
 }
