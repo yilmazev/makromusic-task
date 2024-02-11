@@ -31,7 +31,7 @@ export const useUpdateStore = create<UpdateStore>(
             region: "",
             trackGenre: [] as string[],
             selectedPackage: null,
-            currentStep: 0,
+            currentStep: JSON.parse(localStorage.getItem("stepData") || '{"currentStep": 0}').currentStep,
             stepData: [] as string[],
         },
         (set) => ({

@@ -1,7 +1,7 @@
-import { apiGetPackages } from "@/services/api"
-import { useUpdateStore } from "@/stores/updateStore"
-import axios from "axios"
-import React, { useEffect, useState } from "react"
+import { apiGetPackages } from "@/services/api";
+import { useUpdateStore } from "@/stores/updateStore";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 interface Package {
     id: number;
@@ -19,9 +19,13 @@ const Packages: React.FC = () => {
      */
     
     const { region, selectedPackage, setSelectedPackage } = useUpdateStore()
+    const [ isRequest, setIsRequest ] = useState<boolean>(false)
     const [ packages, setPackages ] = useState<Package[]>([])
+    const [ currency, setCurrency ] = useState<string>("")
 
     useEffect(() => {
+        setIsRequest(true)
+        
         const fetchPackages = async () => {
             try {
                 const response = await apiGetPackages()
@@ -29,8 +33,10 @@ const Packages: React.FC = () => {
                 // Region'a göre filtrele
                 const filteredPackages = response.filter((item: any) => {
                     if (region === "Türkiye") {
+                        setCurrency("₺")
                         return item.currency === "TRY"
                     } else if (region === "Global") {
+                        setCurrency("$")
                         return item.currency === "USD"
                     }
                     return false
@@ -42,8 +48,12 @@ const Packages: React.FC = () => {
                 setPackages(sortedPackages)
     
                 // Default en pahalı paketi seç
-                setSelectedPackage(sortedPackages[0])
+                if(selectedPackage === null) {
+                    setSelectedPackage(sortedPackages[0])
+                }
             } catch (error) {
+                setIsRequest(false)
+
                 if (axios.isCancel(error)) {
                     console.log("Request canceled:", error)
                 } else {
@@ -52,8 +62,10 @@ const Packages: React.FC = () => {
             }
         }
     
-        fetchPackages()
-    }, [])
+        if(!isRequest) {
+            fetchPackages()
+        }
+    }, [isRequest])
 
     return (
         <div className="mb-8 rounded-3xl border border-gray-200 bg-white p-6">
@@ -71,7 +83,7 @@ const Packages: React.FC = () => {
                                     <span className="tracking-[-0.02rem] text-gray-900">{item.click} tıklanma</span>
                                     <p className="text-sm tracking-[-0.02rem] text-gray-500">{item.description}</p>
                                 </div>
-                                <span className="text-right text-sm tracking-[-0.02rem] text-priceGray">₺{item.price}</span>
+                                <span className="text-right text-sm tracking-[-0.02rem] text-priceGray">{currency + item.price}</span>
                             </div>
                         </label>
                     </div>
