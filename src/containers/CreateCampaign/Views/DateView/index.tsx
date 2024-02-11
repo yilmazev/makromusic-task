@@ -1,6 +1,6 @@
-import { apiGetDates } from "@/services/api"
-import { useUpdateStore } from "@/stores/updateStore"
-import React, { useEffect, useState } from "react"
+import { apiGetDates } from "@/services/api";
+import { useUpdateStore } from "@/stores/updateStore";
+import React, { useEffect, useState } from "react";
 
 interface Date {
     id: number;
@@ -38,7 +38,7 @@ const DateView: React.FC = () => {
                 setDates(sortedDates)
     
                 // Default en pahalı tarihi seç
-                if (selectedDate === null) {
+                if ((selectedDate === null) && (region === "Türkiye")) {
                     setSelectedDate(sortedDates[0])
                 }
             } catch (error) {
@@ -51,8 +51,8 @@ const DateView: React.FC = () => {
 
     useEffect(() => {
         if(region !== "Türkiye") {
-            setCurrentStep(currentStep + 1)
             setSelectedDate(null)
+            setCurrentStep(currentStep + 1)
         }
     }, [ region, currentStep ])
 
