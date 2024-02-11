@@ -36,6 +36,7 @@
         "no-empty-pattern": "error",
         "eqeqeq": ["error", "always"],
         "no-duplicate-case": "error",
+        "comma-dangle": ["error", "never"],
         "quotes": [ "error", "double" ],
         "semi": [ "error", "never" ],
         "indent": [ "error", 4 ],

@@ -34,7 +34,7 @@ export const useUpdateStore = create<UpdateStore>(
             setTrackGenre: (trackGenre) => set({ trackGenre }),
             setSelectedPackage: (selectedPackage) => set({ selectedPackage }),
             setSelectedDate: (selectedDate) => set({ selectedDate }),
-            setCurrentStep: (currentStep) => set({ currentStep }),
+            setCurrentStep: (currentStep) => set({ currentStep })
         }),
           { name: "stepData" } as PersistOptions<UpdateStore>
     ) as any

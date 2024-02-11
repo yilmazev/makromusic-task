@@ -24,7 +24,7 @@ export const useCreateStore = create<CreateStore>(
                 } catch (error) {
                     console.error(error)
                 }
-            },
+            }
         }),
         { name: "campaignData" } as PersistOptions<CreateStore>
     ) as any

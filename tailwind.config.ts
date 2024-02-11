@@ -5,7 +5,7 @@ const config: Config = {
         "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
         "./src/layouts/**/*.{js,ts,jsx,tsx,mdx}",
         "./src/containers/**/*.{js,ts,jsx,tsx,mdx}",
-        "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+        "./src/components/**/*.{js,ts,jsx,tsx,mdx}"
     ],
     theme: {
         extend: {
@@ -13,14 +13,14 @@ const config: Config = {
                 primary: {
                     25: "#F9FFFF",
                     600: "#14B1B9",
-                    900: "#101828",
+                    900: "#101828"
                 },
                 surface: "#E9EBF0",
                 borderGray: "#ECEEEB",
-                priceGray: "#344054",
-            },
+                priceGray: "#344054"
+            }
         }
     },
-    plugins: [],
+    plugins: []
 }
 export default config

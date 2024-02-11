@@ -52,7 +52,7 @@ const DetailsView: React.FC = () => {
                 const response = await apiTrackGenres()
                 const trackGenreOptions = response.map((genre: string, index: number) => ({
                     value: index,
-                    label: genre,
+                    label: genre
                 }))
                 
                 setTrackGenres(trackGenreOptions)

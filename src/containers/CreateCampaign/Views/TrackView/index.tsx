@@ -69,7 +69,7 @@ const TrackView: React.FC = () => {
         artist: result.artists[0].name,
         album: result.album,
         preview_url: result.preview_url,
-        uri: result.uri,
+        uri: result.uri
     }))
     
     return (

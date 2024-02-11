@@ -15,7 +15,7 @@ const StepIndicator = () => {
         { title: "Kampanya paketi", showSubtitle: false },
         { title: "Kampanya tarihi", showSubtitle: false },
         { title: "Kampanya onayla", showSubtitle: false },
-        { title: "Ödeme", showSubtitle: true },
+        { title: "Ödeme", showSubtitle: true }
     ]
   
     return (
