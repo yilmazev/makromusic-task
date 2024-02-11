@@ -7,14 +7,11 @@ const DetailsView = lazy(() => import("./Views/DetailsView"))
 const PackageView = lazy(() => import("./Views/PackagesView"))
 const DateView = lazy(() => import("./Views/DateView"))
 const ConfirmView = lazy(() => import("./Views/ConfirmView"))
-const PaymentView = lazy(() => import("./Views/PaymentView"))
 
 const CreateCampaign: React.FC = () => {
     const { selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, selectedDate, currentStep, setCurrentStep } = useUpdateStore()
     const [ isContinue, setIsContinue ] = useState<boolean>(false)
     const [ isStepLoaded, setIsStepLoaded ] = useState<boolean>(false)
-
-    const handleContinue = () => (isContinue) && setCurrentStep(currentStep + 1)
 
     const handleGoBack = () => (currentStep > 0) && setCurrentStep(currentStep - 1)
 
@@ -30,8 +27,6 @@ const CreateCampaign: React.FC = () => {
             return <DateView />
         case 4:
             return <ConfirmView />
-        case 5:
-            return <PaymentView />
         default:
             return ""
         }
@@ -78,7 +73,7 @@ const CreateCampaign: React.FC = () => {
             {currentStep < 4 &&
                  <div className="flex w-full items-center justify-end gap-2.5">
                      <Button variant="secondary" onClick={handleGoBack} disabled={currentStep === 0}>Geri Dön</Button>
-                     <Button onClick={handleContinue} disabled={!isContinue}>Devam Et</Button>
+                     <Button disabled={!isContinue}>Devam Et</Button>
                  </div> }
         </div>
     )

@@ -18,9 +18,21 @@ const DateView: React.FC = () => {
      * ! Typescript options hatası kontrol edilecek
      */
     
-    const { selectedDate, setSelectedDate } = useUpdateStore()
+    const { region, selectedDate, setSelectedDate, currentStep, setCurrentStep } = useUpdateStore()
     const [ dates, setDates ] = useState<Date[]>([])
 
+    const formatDateRange = (dateRange: string[]) => {
+        const startDate = new Date(dateRange[0])
+        const endDate = new Date(dateRange[1])
+    
+        const options = { month: "long", day: "numeric" } as Intl.DateTimeFormatOptions
+    
+        const formattedStartDate = startDate.toLocaleDateString("tr-TR", options)
+        const formattedEndDate = endDate.toLocaleDateString("tr-TR", options)
+    
+        return `${formattedStartDate} - ${formattedEndDate}`
+    }
+    
     useEffect(() => {
         const fetchDates = async () => {
             try {
@@ -43,18 +55,12 @@ const DateView: React.FC = () => {
         fetchDates()
     }, [])
 
-    const formatDateRange = (dateRange: string[]) => {
-        const startDate = new Date(dateRange[0])
-        const endDate = new Date(dateRange[1])
-    
-        const options = { month: "long", day: "numeric" } as Intl.DateTimeFormatOptions
-    
-        const formattedStartDate = startDate.toLocaleDateString("tr-TR", options)
-        const formattedEndDate = endDate.toLocaleDateString("tr-TR", options)
-    
-        return `${formattedStartDate} - ${formattedEndDate}`
-    }
-    
+    useEffect(() => {
+        if(region !== "Türkiye") {
+            setCurrentStep(currentStep + 1)
+            setSelectedDate(null)
+        }
+    }, [ region, currentStep ])
 
     return (
         <div className="mb-8 rounded-3xl border border-gray-200 bg-white p-6">

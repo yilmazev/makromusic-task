@@ -18,9 +18,8 @@ const ConfirmView: React.FC = () => {
      */
 
     const { isTrackNotInAir, selectedTrack, selectedPackage, selectedDate, setCurrentStep } = useUpdateStore()
+    const [ totalPrice, setTotalPrice ] = useState<number>(0)
     const [ currency, setCurrency ] = useState<string>("")
-
-    const totalPrice = selectedPackage.price + selectedDate.price
 
     const formatDateRange = (dateRange: string[]) => {
         const startDate = new Date(dateRange[0])
@@ -41,7 +40,14 @@ const ConfirmView: React.FC = () => {
         } else if (selectedPackage.currency === "USD") {
             setCurrency("$")
         }
-    }, [])
+
+        // Toplam fiyat
+        if(selectedDate !== null) {
+            setTotalPrice(selectedPackage.price + selectedDate.price)
+        } else {
+            setTotalPrice(selectedPackage.price)
+        }
+    }, [ selectedPackage, selectedDate ])
 
     return (
         <div className="w-full">
@@ -58,13 +64,14 @@ const ConfirmView: React.FC = () => {
                         </div>
                         <Button variant="tertiary" onClick={() => setCurrentStep(2)}>Düzenle</Button>
                     </div>
-                    <div className="flex items-end justify-between">
-                        <div>
-                            <span className="mb-0.5 text-sm text-gray-700">Başlangıç tarihi</span>
-                            <p className="text-gray-900">{formatDateRange(selectedDate.date_range)}</p>
-                        </div>
-                        <Button variant="tertiary" onClick={() => setCurrentStep(3)}>Düzenle</Button>
-                    </div>
+                    {selectedDate &&
+                        <div className="flex items-end justify-between">
+                            <div>
+                                <span className="mb-0.5 text-sm text-gray-700">Başlangıç tarihi</span>
+                                <p className="text-gray-900">{formatDateRange(selectedDate.date_range)}</p>
+                            </div>
+                            <Button variant="tertiary" onClick={() => setCurrentStep(3)}>Düzenle</Button>
+                        </div> }
                 </div>
                 <div className="flex w-full max-w-md flex-col rounded-3xl border border-gray-200">
                     <div className="border-b border-gray-200 px-6 py-4">
@@ -87,12 +94,13 @@ const ConfirmView: React.FC = () => {
                                     <p className="text-sm text-gray-900">Paket</p>
                                     <p className="text-sm text-gray-900">{selectedPackage.price} {currency}</p>
                                 </div>
-                                <div className="flex w-full items-center justify-between">
-                                    <p className="text-sm text-gray-900">Tarih</p>
-                                    <p className="text-sm text-gray-900">
-                                        {selectedDate.price > 0 && `${selectedDate.price} ₺`}
-                                    </p>
-                                </div>
+                                {(selectedDate && selectedDate.price > 0) &&
+                                    <div className="flex w-full items-center justify-between">
+                                        <p className="text-sm text-gray-900">Tarih</p>
+                                        <p className="text-sm text-gray-900">{selectedDate.price} ₺
+                                        </p>
+                                    </div>
+                                }
                             </div>
                             <div>
                                 <div className="flex items-center justify-between">
