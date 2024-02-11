@@ -1,9 +1,9 @@
 import React from "react"
 
-const Date: React.FC = () => {
+const DateView: React.FC = () => {
     return (
         <div>Date</div>
     )
 }
 
-export default Date
+export default DateView

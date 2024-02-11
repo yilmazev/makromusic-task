@@ -1,9 +1,9 @@
 import React from "react"
 
-const Confirm: React.FC = () => {
+const ConfirmView: React.FC = () => {
     return (
         <div>Confirm</div>
     )
 }
 
-export default Confirm
+export default ConfirmView

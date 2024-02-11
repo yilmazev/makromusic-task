@@ -40,7 +40,7 @@ const MultiValueRemove: React.FC<MultiValueRemoveProps> = React.memo((props) => 
 })
 
 
-const Details: React.FC = () => {
+const DetailsView: React.FC = () => {
     /** 
     * * Notlar:
     * * - Burada 'region' string olarak gönderilmeli, keyleri önemli değil fakat burda belirlenenen region'a göre bir sonraki adımda paket gösterimi yapılması gerekiyor. Burası checkbox şeklindedir, Global veya Turkiye'den bir tanesi seçilebilmektedir. (+)
@@ -115,4 +115,4 @@ const Details: React.FC = () => {
     )
 }
 
-export default Details
+export default DetailsView

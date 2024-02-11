@@ -16,7 +16,7 @@ interface Options {
     uri: string;
 }
 
-const Track: React.FC = () => {
+const TrackView: React.FC = () => {
     /**
     * * Notlar:
     * * - React-select kütüphanesi kullanılacak (+)
@@ -109,4 +109,4 @@ const Track: React.FC = () => {
     )
 }
 
-export default Track
+export default TrackView
