@@ -13,6 +13,7 @@ const CreateCampaign: React.FC = () => {
     const [ isContinue, setIsContinue ] = useState<boolean>(false)
     const [ isStepLoaded, setIsStepLoaded ] = useState<boolean>(false)
 
+    const handleContinue = () => (isContinue) && setCurrentStep(currentStep + 1)
     const handleGoBack = () => (currentStep > 0) && setCurrentStep(currentStep - 1)
 
     const getStepContent = () => {
@@ -73,7 +74,7 @@ const CreateCampaign: React.FC = () => {
             {currentStep < 4 &&
                  <div className="flex w-full items-center justify-end gap-2.5">
                      <Button variant="secondary" onClick={handleGoBack} disabled={currentStep === 0}>Geri Dön</Button>
-                     <Button disabled={!isContinue}>Devam Et</Button>
+                     <Button onClick={handleContinue} disabled={!isContinue}>Devam Et</Button>
                  </div> }
         </div>
     )
