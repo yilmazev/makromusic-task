@@ -1,6 +1,5 @@
 import { apiGetPackages } from "@/services/api"
 import { useUpdateStore } from "@/stores/updateStore"
-import axios from "axios"
 import React, { useEffect, useState } from "react"
 
 interface Package {
@@ -19,14 +18,15 @@ const PackagesView: React.FC = () => {
      */
     
     const { region, selectedPackage, setSelectedPackage } = useUpdateStore()
-    const [ isRequest, setIsRequest ] = useState<boolean>(false)
     const [ packages, setPackages ] = useState<Package[]>([])
     const [ currency, setCurrency ] = useState<string>("")
 
+    function formatNumberWithDot(number: number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    }
+
     useEffect(() => {
         const fetchPackages = async () => {
-            setIsRequest(true)
-            
             try {
                 const response = await apiGetPackages()
     
@@ -52,18 +52,12 @@ const PackagesView: React.FC = () => {
                     setSelectedPackage(sortedPackages[0])
                 }
             } catch (error) {
-                setIsRequest(false)
-
-                if (axios.isCancel(error)) {
-                    console.log("Request canceled:", error)
-                } else {
-                    console.error(error)
-                }
+                console.error(error)
             }
         }
     
         fetchPackages()
-    }, [ isRequest, region ])
+    }, [ region ])
 
     return (
         <div className="mb-8 rounded-3xl border border-gray-200 bg-white p-6">
@@ -73,12 +67,20 @@ const PackagesView: React.FC = () => {
             <div className="flex flex-col gap-3">
                 {packages.map((item) => (
                     <div key={item.id} className="relative size-full">
-                        <input type="radio" id={`package-${item.id}`} name="package" onChange={() => setSelectedPackage(item)} checked={selectedPackage?.id === item.id} className="peer" hidden />
+                        <input
+                            type="radio" 
+                            id={`package-${item.id}`} 
+                            name="package" 
+                            onChange={() => setSelectedPackage(item)}
+                            checked={selectedPackage?.id === item.id}
+                            className="peer"
+                            hidden
+                        />
                         <label htmlFor={`package-${item.id}`}  className="block w-full cursor-pointer rounded-xl border border-gray-200 p-4 text-gray-900 transition-all peer-checked:border-primary-600 peer-checked:bg-primary-25">
                             <span className="mb-1 text-sm tracking-[-0.02rem] text-primary-600">{item.name}</span>
                             <div className="flex items-end justify-between">
                                 <div className="flex flex-col">
-                                    <span className="tracking-[-0.02rem] text-gray-900">{item.click} tıklanma</span>
+                                    <span className="tracking-[-0.02rem] text-gray-900">{formatNumberWithDot(item.click)} tıklanma</span>
                                     <p className="text-sm tracking-[-0.02rem] text-gray-500">{item.description}</p>
                                 </div>
                                 <span className="text-right text-sm tracking-[-0.02rem] text-priceGray">{currency + item.price}</span>

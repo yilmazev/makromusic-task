@@ -37,3 +37,12 @@ export const apiGetPackages = async () => {
         return []
     }
 }
+
+export const apiGetDates = async () => {
+    try {
+        const response = await axios.get(`${apiEndpoint}/get-dates`)
+        return response.data
+    } catch (error) {
+        return []
+    }
+}

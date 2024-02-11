@@ -47,7 +47,7 @@ const DetailsView: React.FC = () => {
     * * - 'track-genres' route'undan gelmesi gerekmekte datanın ve multiple selection yapılabilir olmalı ve buna göre kayıt atmalı. (+)
     */
 
-    const { region, setRegion, trackGenre, setTrackGenre } = useUpdateStore()
+    const { region, setRegion, trackGenre, setTrackGenre, setSelectedPackage } = useUpdateStore()
     const [ isLoading, setIsLoading ] = useState<boolean>(false)
     const [ trackGenres, setTrackGenres ] = useState<string[]>([])
 
@@ -86,11 +86,11 @@ const DetailsView: React.FC = () => {
                 </div>
                 <div className="flex gap-5">
                     <div className="relative size-full">
-                        <input type="radio" id="region-tr" name="region" className="peer" onChange={() => setRegion("Türkiye")} checked={region === "Türkiye"} hidden />
+                        <input type="radio" id="region-tr" name="region" className="peer" onChange={() => {setRegion("Türkiye"), setSelectedPackage(null)}} checked={region === "Türkiye"} hidden />
                         <label htmlFor="region-tr" className="block w-full cursor-pointer rounded-[10px] border border-gray-300 px-3 py-2 tracking-[-0.02rem] text-gray-900 transition-all peer-checked:border-primary-600 peer-checked:bg-primary-25">Türkiye</label>
                     </div>
                     <div className="relative size-full">
-                        <input type="radio" id="region-global" name="region" className="peer" onChange={() => setRegion("Global")} checked={region === "Global"} hidden />
+                        <input type="radio" id="region-global" name="region" className="peer" onChange={() => {setRegion("Global"), setSelectedPackage(null)}} checked={region === "Global"} hidden />
                         <label htmlFor="region-global" className="block w-full cursor-pointer rounded-[10px] border border-gray-300 px-3 py-2 tracking-[-0.02rem] text-gray-900 transition-all peer-checked:border-primary-600 peer-checked:bg-primary-25">Global</label>
                     </div>
                 </div>

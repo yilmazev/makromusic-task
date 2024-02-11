@@ -7,27 +7,44 @@ import React from "react"
 
 const StepIndicator = () => {
     const { currentStep } = useUpdateStore()
-    const stepTitles = [ "Parçan", "Detaylar", "Kampanyan", "Ödeme" ]
-
+  
+    const steps = [
+        { title: "Parçan", showSubtitle: true },
+        { title: "Detaylar", showSubtitle: true },
+        { title: "Kampanyan", showSubtitle: true },
+        { title: "Kampanya paketi", showSubtitle: false },
+        { title: "Kampanya tarihi", showSubtitle: false },
+        { title: "Kampanya onayla", showSubtitle: false },
+        { title: "Ödeme", showSubtitle: true },
+    ]
+  
     return (
-        <>
-            {stepTitles.map((title, index) => (
+        <div className="flex items-center gap-4">
+            {steps.map((step, index) => (
                 <React.Fragment key={index}>
-                    <p className="tracking-[-0.04rem] text-gray-400">{title}</p>
-                    <div className="h-1 w-8 rounded-2xl bg-gray-200">
-                        <div
-                            className={`h-full rounded-2xl bg-primary-600 transition-all duration-500 ${
-                                (index === currentStep && "w-2") ||
-                                (index < currentStep && "w-full") ||
-                                (index > currentStep && "w-0")
-                            }`}
-                        />
-                    </div>
+                    {step.showSubtitle && (
+                        <>
+                            <p className="tracking-[-0.04rem] text-gray-400">{step.title}</p>
+                            <div className="relative h-1 w-8 rounded-2xl bg-gray-200">
+                                <div
+                                    className={`h-full rounded-2xl bg-primary-600 transition-all duration-500 ${
+                                        (currentStep >= 2 && index >= 2 && index <= 4)
+                                            ? "w-2"
+                                            : currentStep > index
+                                                ? "w-full"
+                                                : currentStep === index
+                                                    ? "w-2"
+                                                    : "w-0"
+                                    }`}
+                                />
+                            </div>
+                        </>
+                    )}
                 </React.Fragment>
             ))}
-        </>
+        </div>
     )
-}
+}  
 
 const HeaderContent = () => {
     return (

@@ -10,7 +10,7 @@ const ConfirmView = lazy(() => import("./Views/ConfirmView"))
 const PaymentView = lazy(() => import("./Views/PaymentView"))
 
 const CreateCampaign: React.FC = () => {
-    const { selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep, setCurrentStep } = useUpdateStore()
+    const { selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, selectedDate, currentStep, setCurrentStep } = useUpdateStore()
     const [ isContinue, setIsContinue ] = useState<boolean>(false)
     const [ isStepLoaded, setIsStepLoaded ] = useState<boolean>(false)
 
@@ -52,6 +52,9 @@ const CreateCampaign: React.FC = () => {
           
             case 2:
                 return selectedPackage !== null
+
+            case 3:
+                return selectedDate !== null
           
             default:
                 return false
@@ -59,7 +62,7 @@ const CreateCampaign: React.FC = () => {
         }    
         
         setIsContinue(checkIsContinue())
-    }, [ selectedTrack, isTrackNotInAir, region, trackGenre, currentStep ])
+    }, [ selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, currentStep ])
 
     return (
         <div className="w-full">
