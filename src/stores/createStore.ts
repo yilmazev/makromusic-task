@@ -3,7 +3,7 @@ import { create } from "zustand"
 import { PersistOptions, persist } from "zustand/middleware"
 
 type CreateStore = {
-    campaignData: null | undefined | any
+    campaignData: any
     createCampaign: () => Promise<void>
 }
 

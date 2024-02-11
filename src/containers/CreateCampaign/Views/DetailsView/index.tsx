@@ -39,7 +39,6 @@ const MultiValueRemove: React.FC<MultiValueRemoveProps> = React.memo((props) => 
     )
 })
 
-
 const DetailsView: React.FC = () => {
     const { region, setRegion, trackGenre, setTrackGenre, setSelectedPackage } = useUpdateStore()
     const [ isLoading, setIsLoading ] = useState<boolean>(false)

@@ -5,14 +5,6 @@ import React, { useEffect, useState } from "react"
 
 const ConfirmView: React.FC = () => {
     /**
-     * ! Notlar:
-     * * Düzenle butonlarına basıldığında gerekli sayfaya yönlendirme sağlanacak
-     * ! "get-on-spotify" route'u kullanılarak alınabilir.
-     * * Parcam yayinda degil ise gozukmesin
-     * * Eğer seçilen date ücretliyse burda yansıması lazım
-     */
-
-    /**
      * ! UYARI:
      * ! Performansı düşürmesi sebebiyle get-on-spotify apisine istek atıp şarkı bilgileri almak yerine, state ortamında sakladığım veriyi yazdırdım.  
      */
@@ -71,7 +63,8 @@ const ConfirmView: React.FC = () => {
                                 <p className="text-gray-900">{formatDateRange(selectedDate.date_range)}</p>
                             </div>
                             <Button variant="tertiary" onClick={() => setCurrentStep(3)}>Düzenle</Button>
-                        </div> }
+                        </div>
+                    }
                 </div>
                 <div className="flex w-full max-w-md flex-col rounded-3xl border border-gray-200">
                     <div className="border-b border-gray-200 px-6 py-4">

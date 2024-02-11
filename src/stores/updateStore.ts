@@ -19,23 +19,23 @@ type UpdateStore = {
 }
 
 export const useUpdateStore = create<UpdateStore>(
-  persist<UpdateStore>(
-      (set) => ({
-          isTrackNotInAir: false,
-          selectedTrack: null,
-          region: "",
-          trackGenre: [],
-          selectedPackage: null,
-          selectedDate: null,
-          currentStep: 0,
-          setIsTrackNotInAir: (isTrackNotInAir) => set({ isTrackNotInAir }),
-          setSelectedTrack: (selectedTrack) => set({ selectedTrack }),
-          setRegion: (region) => set({ region }),
-          setTrackGenre: (trackGenre) => set({ trackGenre }),
-          setSelectedPackage: (selectedPackage) => set({ selectedPackage }),
-          setSelectedDate: (selectedDate) => set({ selectedDate }),
-          setCurrentStep: (currentStep) => set({ currentStep }),
-      }),
-        { name: "stepData" } as PersistOptions<UpdateStore>
-  ) as any
+    persist<UpdateStore>(
+        (set) => ({
+            isTrackNotInAir: false,
+            selectedTrack: null,
+            region: "",
+            trackGenre: [],
+            selectedPackage: null,
+            selectedDate: null,
+            currentStep: 0,
+            setIsTrackNotInAir: (isTrackNotInAir) => set({ isTrackNotInAir }),
+            setSelectedTrack: (selectedTrack) => set({ selectedTrack }),
+            setRegion: (region) => set({ region }),
+            setTrackGenre: (trackGenre) => set({ trackGenre }),
+            setSelectedPackage: (selectedPackage) => set({ selectedPackage }),
+            setSelectedDate: (selectedDate) => set({ selectedDate }),
+            setCurrentStep: (currentStep) => set({ currentStep }),
+        }),
+          { name: "stepData" } as PersistOptions<UpdateStore>
+    ) as any
 )

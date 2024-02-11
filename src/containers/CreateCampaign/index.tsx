@@ -11,7 +11,7 @@ const ConfirmView = lazy(() => import("./Views/ConfirmView"))
 const CreateCampaign: React.FC = () => {
     const { selectedTrack, isTrackNotInAir, region, trackGenre, selectedPackage, selectedDate, currentStep, setCurrentStep } = useUpdateStore()
     const [ isContinue, setIsContinue ] = useState<boolean>(false)
-    const [ isStepLoaded, setIsStepLoaded ] = useState<boolean>(false)
+    const [ isLoading, setIsLoading ] = useState<boolean>(false)
 
     const handleContinue = () => (isContinue) && setCurrentStep(currentStep + 1)
     const handleGoBack = () => (currentStep > 0) && setCurrentStep(currentStep - 1)
@@ -34,7 +34,7 @@ const CreateCampaign: React.FC = () => {
     }
     
     useEffect(() => {
-        setIsStepLoaded(true)
+        setIsLoading(true)
     }, [ currentStep ])
     
     useEffect(() => {
@@ -64,18 +64,19 @@ const CreateCampaign: React.FC = () => {
         <div className="w-full">
             <Suspense
                 fallback={
-                    isStepLoaded && <div className="flex w-full justify-center">
+                    isLoading && <div className="flex w-full justify-center">
                         <Spinner className="size-12 animate-spin fill-none" />
                     </div>
                 }
             >
-                {isStepLoaded && getStepContent()}
+                {isLoading && getStepContent()}
             </Suspense>
             {currentStep < 4 &&
-                 <div className="flex w-full items-center justify-end gap-2.5">
-                     <Button variant="secondary" onClick={handleGoBack} disabled={currentStep === 0}>Geri Dön</Button>
-                     <Button onClick={handleContinue} disabled={!isContinue}>Devam Et</Button>
-                 </div> }
+                <div className="flex w-full items-center justify-end gap-2.5">
+                    <Button variant="secondary" onClick={handleGoBack} disabled={currentStep === 0}>Geri Dön</Button>
+                    <Button onClick={handleContinue} disabled={!isContinue}>Devam Et</Button>
+                </div>
+            }
         </div>
     )
 }

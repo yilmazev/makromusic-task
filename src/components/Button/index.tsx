@@ -3,12 +3,12 @@ import { ButtonHTMLAttributes, ReactNode } from "react"
 import { Spinner } from "../Icons"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "tertiary";
-  size?: "small" | "medium" | "large";
-  isFull?: boolean;
-  isLoading?: boolean;
-  disabled?: boolean;
-  children: ReactNode;
+    variant?: "primary" | "secondary" | "tertiary"
+    size?: "small" | "medium" | "large"
+    isFull?: boolean
+    isLoading?: boolean
+    disabled?: boolean
+    children: ReactNode
 }
 
 const Button: React.FC<ButtonProps> = (props) => {

@@ -3,12 +3,12 @@
 import Header from "@/components/Header"
 import React, { ReactNode } from "react"
 
-interface DefaultLayoutProps {
+interface BaseLayoutProps {
     header: ReactNode
     children: ReactNode
 }
 
-const DefaultLayout: React.FC<DefaultLayoutProps> = ({ header, children }) => {
+const BaseLayout: React.FC<BaseLayoutProps> = ({ header, children }) => {
     return (
         <div>
             <Header>
@@ -23,4 +23,4 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({ header, children }) => {
     )
 }
 
-export default DefaultLayout
+export default BaseLayout

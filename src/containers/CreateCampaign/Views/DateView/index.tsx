@@ -12,12 +12,6 @@ interface Date {
 }
 
 const DateView: React.FC = () => {
-    /**
-     * * Notlar:
-     * * -'get-dates' route'undan alınması gerekiyor. Default olarak ücretli tarihin seçilmesi gerekiyor. Eğer region Global ise tüm date'ler 'TRY' tanımlandığı için bu adımı direkt olarak atlaması bekleniyor.
-     * ! Typescript options hatası kontrol edilecek
-     */
-    
     const { region, selectedDate, setSelectedDate, currentStep, setCurrentStep } = useUpdateStore()
     const [ dates, setDates ] = useState<Date[]>([])
 

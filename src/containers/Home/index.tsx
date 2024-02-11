@@ -11,7 +11,6 @@ const Home: React.FC = () => {
 
     const [ isLoading, setIsLoading ] = useState<boolean>(false)
 
-    // Kampanya oluştur
     const handleCreateCampaign = async () => {
         setIsLoading(true)
 

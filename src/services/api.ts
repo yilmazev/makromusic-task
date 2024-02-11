@@ -7,7 +7,7 @@ export const apiCreateCampaign = async () => {
         const response = await axios.get(`${apiEndpoint}/create-campaign`)
         return response.data
     } catch (error) {
-        return error
+        return []
     }
 }
 

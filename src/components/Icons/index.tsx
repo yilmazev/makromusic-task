@@ -1,5 +1,5 @@
 interface IconProps {
-    className: string;
+    className: string
 }
 
 export const Spinner: React.FC<IconProps> = ({ className }) => {

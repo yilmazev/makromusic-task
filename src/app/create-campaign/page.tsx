@@ -1,7 +1,7 @@
 "use client"
 
 import CreateCampaign from "@/containers/CreateCampaign"
-import DefaultLayout from "@/layouts/defaultLayout"
+import BaseLayout from "@/layouts/baseLayout"
 import { useUpdateStore } from "@/stores/updateStore"
 import React from "react"
 
@@ -60,8 +60,8 @@ const HeaderContent = () => {
 
 export default function Home() {
     return (
-        <DefaultLayout header={<HeaderContent />}>
+        <BaseLayout header={<HeaderContent />}>
             <CreateCampaign />
-        </DefaultLayout>
+        </BaseLayout>
     )
 }
