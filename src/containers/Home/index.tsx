@@ -19,6 +19,7 @@ const Home: React.FC = () => {
         // API probleminde uyarı göster
         setTimeout(() => {
             setIsRequestFailed(true)
+            setIsLoading(false)
         }, 5000)
 
         try {
