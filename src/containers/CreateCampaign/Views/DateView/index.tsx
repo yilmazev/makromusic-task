@@ -3,12 +3,12 @@ import { useUpdateStore } from "@/stores/updateStore"
 import React, { useEffect, useState } from "react"
 
 interface Date {
-    id: number;
-    name: string;
-    date_range: string[];
-    price: number;
-    description: string;
-    currency: string;
+    id: number
+    name: string
+    date_range: string[]
+    price: number
+    description: string
+    currency: string
 }
 
 const DateView: React.FC = () => {

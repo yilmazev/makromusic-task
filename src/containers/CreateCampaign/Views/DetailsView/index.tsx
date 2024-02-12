@@ -44,6 +44,10 @@ const DetailsView: React.FC = () => {
     const [ isLoading, setIsLoading ] = useState<boolean>(false)
     const [ trackGenres, setTrackGenres ] = useState<string[]>([])
 
+    const handleTrackGenreChange = (selectedOptions: any) => {
+        setTrackGenre(selectedOptions || [])
+    }
+
     useEffect(() => {
         const fetchTrackGenres = async () => {
             setIsLoading(true)
@@ -65,10 +69,6 @@ const DetailsView: React.FC = () => {
 
         fetchTrackGenres()
     }, [])
-
-    const handleTrackGenreChange = (selectedOptions: any) => {
-        setTrackGenre(selectedOptions || [])
-    }
 
     return (
         <div className="flex flex-col gap-11">

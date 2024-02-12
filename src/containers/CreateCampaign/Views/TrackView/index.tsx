@@ -22,11 +22,6 @@ const TrackView: React.FC = () => {
     const [ searchResults, setSearchResults ] = useState<Options[]>([])
     const [ isLoading, setIsLoading ] = useState<boolean>(false)
     const debounce = useDebouncedSearch(500)
-    
-    // Gecikmeli arama
-    useEffect(() => {
-        debounce(handleDebouncedSearch)
-    }, [ searchQuery ])    
 
     // Arama sonuçları
     const handleDebouncedSearch = async () => {
@@ -71,6 +66,11 @@ const TrackView: React.FC = () => {
         preview_url: result.preview_url,
         uri: result.uri
     }))
+
+    // Gecikmeli arama
+    useEffect(() => {
+        debounce(handleDebouncedSearch)
+    }, [ searchQuery ])    
     
     return (
         <div className="mb-8 rounded-3xl border border-gray-200 bg-white p-6">
