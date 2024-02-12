@@ -14,15 +14,18 @@ const Home: React.FC = () => {
 
     const handleCreateCampaign = async () => {
         setIsLoading(true)
+        setIsRequestFailed(false)
+
+        // API probleminde uyarı göster
+        setTimeout(() => {
+            setIsRequestFailed(true)
+        }, 5000)
 
         try {
-            await createCampaign()
-            router.push("/create-campaign")
-            
-            // API probleminde uyarı göster
-            setTimeout(() => {
-                setIsRequestFailed(true)
-            }, 3000)
+            if(!isRequestFailed) {
+                await createCampaign()
+                router.push("/create-campaign")
+            }
         } catch {
             setIsLoading(false)
         }

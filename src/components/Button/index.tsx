@@ -37,7 +37,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     )
 
     return (
-        <button className={classes} disabled={disabled} {...rest}>
+        <button className={classes} disabled={disabled || isLoading} {...rest}>
             {isLoading && <Spinner className={`animate-spin fill-none ${getSpinnerSizeClass(size)}`} /> }
             {children}
         </button>
